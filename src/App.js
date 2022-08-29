@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
-import Employee from './Pages/Employee';
+import Form from './Pages/Form';
 import Employees from './Pages/Employees';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
      The right column will display either the new employee form or the employee's list */}
       <Navbar />
       <Routes>
-        <Route path="" element={<Employee />} />
+        <Route path="" element={<Form />} />
         <Route path="/employees" element={<Employees />} />
       </Routes>
     </div>
