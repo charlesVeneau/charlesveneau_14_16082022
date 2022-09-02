@@ -19,7 +19,11 @@ function Select({ name }) {
         className="border-solid border rounded-md border-slate-300 mb-4 w-44"
       >
         {SELECT_DATA[0][name].map((element) => {
-          return <option value={element.abbrev}>{element.label}</option>;
+          return (
+            <option key={element.abbrev} value={element.abbrev}>
+              {element.label}
+            </option>
+          );
         })}
       </select>
     </div>
