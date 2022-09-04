@@ -1,7 +1,26 @@
 import Input from '../../Components/Input';
 import Select from '../../Components/Select';
+import { useState } from 'react';
 
 function Employee() {
+  const userMockup = {
+    firstName: null,
+    lastName: null,
+    dateOfBirth: null,
+    street: null,
+    city: null,
+    state: null,
+    stateAbbrev: null,
+    zipCode: null,
+    startDate: null,
+    department: null,
+  };
+  const [userInfo, setUserInfo] = useState(userMockup);
+
+  function handleChange(event, name) {
+    setUserInfo({ ...userInfo, [name]: event });
+  }
+
   return (
     <article className="col-span-3 my-4 mx-8 text-right">
       <h2 className="font-bold text-2xl text-center text-gray-900 mb-6">
@@ -11,10 +30,30 @@ function Employee() {
         <form action="">
           <div className="bg-white rounded-lg shadow py-4 flex justify-content align-middle text-left mb-6">
             <div action="" className="mx-auto">
-              <Input type="text" name="First Name" />
-              <Input type="text" name="Last Name" />
-              <Input type="date" name="Date of Birth" />
-              <Input type="date" name="Start Date" />
+              <Input
+                userInfo={userInfo}
+                handleChange={handleChange}
+                type="text"
+                name="First Name"
+              />
+              <Input
+                userInfo={userInfo}
+                handleChange={handleChange}
+                type="text"
+                name="Last Name"
+              />
+              <Input
+                userInfo={userInfo}
+                handleChange={handleChange}
+                type="date"
+                name="Date of Birth"
+              />
+              <Input
+                userInfo={userInfo}
+                handleChange={handleChange}
+                type="date"
+                name="Start Date"
+              />
             </div>
           </div>
           <div className="bg-white rounded-lg shadow py-4 flex flex-col justify-center align-middle text-left mb-6">
@@ -22,15 +61,38 @@ function Employee() {
               Address
             </h3>
             <div action="" className="mx-auto">
-              <Input type="text" name="Street" />
-              <Input type="text" name="City" />
-              <Select name="state" />
-              <Input type="text" name="Zip Code" />
+              <Input
+                userInfo={userInfo}
+                handleChange={handleChange}
+                type="text"
+                name="Street"
+              />
+              <Input
+                userInfo={userInfo}
+                handleChange={handleChange}
+                type="text"
+                name="City"
+              />
+              <Select
+                userInfo={userInfo}
+                handleChange={handleChange}
+                name="state"
+              />
+              <Input
+                userInfo={userInfo}
+                handleChange={handleChange}
+                type="text"
+                name="Zip Code"
+              />
             </div>
           </div>
           <div className="bg-white rounded-lg shadow py-4 flex flex-col justify-center align-middle text-left mb-6">
             <div action="" className="mx-auto">
-              <Select name="department" />
+              <Select
+                userInfo={userInfo}
+                handleChange={handleChange}
+                name="department"
+              />
             </div>
           </div>
         </form>

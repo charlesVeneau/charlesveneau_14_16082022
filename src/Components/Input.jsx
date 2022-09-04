@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-// function handleChange(event) {
-//   console.log(event.target.value.length);
-//   event.target.value.length > 0 ? (hasError = true) : (hasError = false);
-// }
-
 /**
  * Return input based on props
  *
@@ -15,29 +10,40 @@ import { useState } from 'react';
  * @param {string} props.name
  * @return {react.Component}
  */
-function Input({ type, name }) {
+function Input({ userInfo, handleChange, type, name }) {
   let [isValid, setIsValid] = useState(false);
   let [hasError, setHasError] = useState(false);
 
-  function handleChange(event) {
+  /**
+   * If the input value is two or more letters, then set the isValid state to true and the hasError state
+   * to false. Otherwise, set the isValid state to false and the hasError state to true
+   */
+  function handleError(event) {
     if (/^[a-zA-Z]{2,}$/.test(event.target.value)) {
       setIsValid(true);
       setHasError(false);
+      handleChange(event.target.value, getName(name));
     } else {
       setIsValid(false);
       setHasError(true);
     }
   }
 
+  function getName(name) {
+    const temp = name.split(' ');
+    temp[0] = temp[0].toLowerCase();
+    return temp.join('');
+  }
+
   return (
     <div className="inputElt">
-      <label htmlFor={name.split(' ').join(' ')} className="block my-2">
+      <label htmlFor={getName(name)} className="block my-2">
         {name}
       </label>
       <input
         type={type}
-        name={name.split(' ').join(' ')}
-        id={name.split(' ').join(' ')}
+        name={getName(name)}
+        id={getName(name)}
         className={`border-solid rounded-md mb-4 w-64 ${
           isValid
             ? 'border-green-600 border-2'
@@ -45,7 +51,7 @@ function Input({ type, name }) {
             ? 'border-red-500 border-2'
             : 'border-slate-300 border'
         }`}
-        onChange={handleChange}
+        onChange={handleError}
       />
     </div>
   );
