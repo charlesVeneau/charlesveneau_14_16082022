@@ -16,7 +16,7 @@ function Select({ name }) {
       </label>
       <select
         id={name}
-        className="border-solid border rounded-md border-slate-300 mb-4 w-44"
+        className="border-solid border rounded-md border-slate-300 mb-4 w-64"
       >
         {SELECT_DATA[0][name].map((element) => {
           return (
