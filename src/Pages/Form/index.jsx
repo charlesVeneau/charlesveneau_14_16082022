@@ -1,6 +1,13 @@
 import Input from '../../Components/Input';
 import Select from '../../Components/Select';
+import SELECT_DATA from '../../data/SELECT_DATA.json';
 import { useState } from 'react';
+
+/**
+ * The Employee function returns a form that takes in user information and then saves it to the
+ * userInfo state
+ * @returns The Employee component is being returned.
+ */
 
 function Employee() {
   const userMockup = {
@@ -17,6 +24,10 @@ function Employee() {
   };
   const [userInfo, setUserInfo] = useState(userMockup);
 
+  /**
+   * The function takes in an event and a name, and then sets the userInfo state to the current userInfo
+   * state, but with the name property set to the event
+   */
   function handleChange(event, name) {
     setUserInfo({ ...userInfo, [name]: event });
   }
@@ -76,6 +87,7 @@ function Employee() {
               <Select
                 userInfo={userInfo}
                 handleChange={handleChange}
+                data={SELECT_DATA[0]['state']}
                 name="state"
               />
               <Input
@@ -91,6 +103,7 @@ function Employee() {
               <Select
                 userInfo={userInfo}
                 handleChange={handleChange}
+                data={SELECT_DATA[0]['department']}
                 name="department"
               />
             </div>
