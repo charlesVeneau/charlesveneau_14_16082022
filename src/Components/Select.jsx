@@ -28,7 +28,7 @@ function Select({ userInfo, handleChange, data, name }) {
       </label>
       <select
         id={name}
-        className="border-solid border rounded-md border-slate-300 mb-4 w-64"
+        className="border-solid border rounded-md border-slate-300 mb-4 w-64 h-7"
         onChange={(event) => handleChange(event.target.value, getName(name))}
       >
         {data.map((element) => {
