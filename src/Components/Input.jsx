@@ -19,13 +19,41 @@ function Input({ userInfo, handleChange, type, name }) {
    * to false. Otherwise, set the isValid state to false and the hasError state to true
    */
   function handleError(event) {
-    if (/^[a-zA-Z]{2,}$/.test(event.target.value)) {
-      setIsValid(true);
-      setHasError(false);
-      handleChange(event.target.value, getName(name));
-    } else {
-      setIsValid(false);
-      setHasError(true);
+    if (
+      getName(name) === 'firstName' ||
+      getName(name) === 'lastName' ||
+      getName(name) === 'city' ||
+      getName(name) === 'street'
+    ) {
+      if (/^.{2,}$/.test(event.target.value)) {
+        setIsValid(true);
+        setHasError(false);
+        handleChange(event.target.value, getName(name));
+      } else {
+        setIsValid(false);
+        setHasError(true);
+      }
+    } else if (getName(name) === 'zipCode') {
+      if (/^\d{2,}$/.test(event.target.value)) {
+        setIsValid(true);
+        setHasError(false);
+        handleChange(event.target.value, getName(name));
+      } else {
+        setIsValid(false);
+        setHasError(true);
+      }
+    } else if (
+      getName(name) === 'dateofBirth' ||
+      getName(name) === 'startDate'
+    ) {
+      if (/^\d{4}[-]\d{2}[-]\d{2}$/.test(event.target.value)) {
+        setIsValid(true);
+        setHasError(false);
+        handleChange(event.target.value, getName(name));
+      } else {
+        setIsValid(false);
+        setHasError(true);
+      }
     }
   }
 

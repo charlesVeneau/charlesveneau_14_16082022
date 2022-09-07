@@ -16,7 +16,6 @@ function Employee() {
     dateOfBirth: null,
     street: null,
     city: null,
-    state: null,
     stateAbbrev: null,
     zipCode: null,
     startDate: null,
