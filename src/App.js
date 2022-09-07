@@ -6,7 +6,7 @@ import Employees from './Pages/Employees';
 
 function App() {
   return (
-    <div className="App grid grid-cols-4 h-screen bg-slate-200">
+    <div className="App grid grid-cols-4 bg-slate-200">
       {/* What I want?
      2 columns
      the left one contains a header with the logo and the name of the website (HRNet)
