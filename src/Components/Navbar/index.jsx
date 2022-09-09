@@ -1,6 +1,5 @@
-import Logo from '../assets/logoPNG.png';
-import { UserAddIcon } from '@heroicons/react/outline';
-import { UserGroupIcon } from '@heroicons/react/outline';
+import Logo from '../../assets/logoPNG.png';
+import { UserAddIcon, UserGroupIcon } from '@heroicons/react/outline';
 import { NavLink } from 'react-router-dom';
 
 function Navbar() {
