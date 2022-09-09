@@ -33,13 +33,17 @@ function Employee() {
     setUserInfo({ ...userInfo, [name]: event });
   }
 
+  /* Checking to see if the userInfo object has any empty values. If it does, it sets the hasError state
+to true. If it doesn't, it sets the hasError state to false. */
   useEffect(() => {
     const userValues = Object.values(userInfo);
     const errors = userValues.filter((value) => !value);
-    console.log(!errors[1]);
     return errors.length > 0 ? setHasError(true) : setHasError(false);
   }, [userInfo]);
 
+  /**
+   * It takes the userInfo object and saves it to localStorage
+   */
   function saveUser() {
     const users = JSON.parse(localStorage.getItem('savedUsers'));
     const array = [];
