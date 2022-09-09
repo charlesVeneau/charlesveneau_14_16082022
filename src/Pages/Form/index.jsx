@@ -1,7 +1,7 @@
 import Input from '../../Components/Input';
 import Select from '../../Components/Select';
 import SELECT_DATA from '../../data/SELECT_DATA.json';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * The Employee function returns a form that takes in user information and then saves it to the
@@ -13,7 +13,7 @@ function Employee() {
   const userMockup = {
     firstName: null,
     lastName: null,
-    dateOfBirth: null,
+    dateofBirth: null,
     street: null,
     city: null,
     stateAbbrev: null,
@@ -23,12 +23,33 @@ function Employee() {
   };
   const [userInfo, setUserInfo] = useState(userMockup);
 
+  const [hasError, setHasError] = useState(true);
+
   /**
    * The function takes in an event and a name, and then sets the userInfo state to the current userInfo
    * state, but with the name property set to the event
    */
   function handleChange(event, name) {
     setUserInfo({ ...userInfo, [name]: event });
+  }
+
+  useEffect(() => {
+    const userValues = Object.values(userInfo);
+    const errors = userValues.filter((value) => !value);
+    console.log(!errors[1]);
+    return errors.length > 0 ? setHasError(true) : setHasError(false);
+  }, [userInfo]);
+
+  function saveUser() {
+    const users = JSON.parse(localStorage.getItem('savedUsers'));
+    const array = [];
+    if (users) {
+      users.push(userInfo);
+      localStorage.setItem('savedUsers', JSON.stringify(users));
+    } else {
+      array.push(userInfo);
+      localStorage.setItem('savedUsers', JSON.stringify(array));
+    }
   }
 
   return (
@@ -110,7 +131,9 @@ function Employee() {
         </form>
         <button
           type="submit"
-          className="mt-6 bg-green-600 text-slate-50 font-bold py-2 px-4 rounded hover:bg-green-700 transition"
+          className="mt-6 bg-green-600 text-slate-50 font-bold py-2 px-4 rounded hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-slate-400 transition"
+          disabled={hasError}
+          onClick={saveUser}
         >
           Save
         </button>

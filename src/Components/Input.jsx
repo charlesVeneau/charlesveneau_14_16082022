@@ -15,8 +15,10 @@ function Input({ userInfo, handleChange, type, name }) {
   let [hasError, setHasError] = useState(false);
 
   /**
-   * If the input value is two or more letters, then set the isValid state to true and the hasError state
-   * to false. Otherwise, set the isValid state to false and the hasError state to true
+   * If the input is a firstName, lastName, city, or street, then check if the input is at least 2
+   * characters long. If it is, then set the isValid state to true, set the hasError state to false, and
+   * call the handleChange function with the input value and the name of the input. If the input is not
+   * at least 2 characters long, then set the isValid state to false, set the hasError state to true
    */
   function handleError(event) {
     if (
@@ -57,6 +59,11 @@ function Input({ userInfo, handleChange, type, name }) {
     }
   }
 
+  /**
+   * It takes a string, splits it into an array, makes the first element lowercase, and then joins it
+   * back into a string
+   * @returns the first name of the person in lowercase.
+   */
   function getName(name) {
     const temp = name.split(' ');
     temp[0] = temp[0].toLowerCase();
