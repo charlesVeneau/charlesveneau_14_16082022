@@ -4,6 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { ModalContext } from '../../utils/context';
 
+/**
+ * It's a modal that displays a success message when an employee is added
+ * @returns A modal component that is rendered when the isSaved state is true.
+ */
 function Modal() {
   const { toggleIsSaved } = useContext(ModalContext);
 

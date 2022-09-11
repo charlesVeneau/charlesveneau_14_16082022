@@ -10,7 +10,7 @@ import { useState } from 'react';
  * @param {string} props.name
  * @return {react.Component}
  */
-function Input({ userInfo, handleChange, type, name }) {
+function Input({ handleChange, type, name }) {
   let [isValid, setIsValid] = useState(false);
   let [hasError, setHasError] = useState(false);
 

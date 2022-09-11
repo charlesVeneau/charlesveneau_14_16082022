@@ -7,6 +7,10 @@ import Modal from './Components/Modal';
 import Form from './Pages/Form';
 import Employees from './Pages/Employees';
 
+/**
+ * We're using the `useContext` hook to get the `isSaved` state from the `ModalContext` context
+ * @returns The App component is being returned.
+ */
 function App() {
   const { isSaved } = useContext(ModalContext);
 

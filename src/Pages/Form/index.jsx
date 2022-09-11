@@ -71,25 +71,17 @@ to true. If it doesn't, it sets the hasError state to false. */
           <div className="bg-white rounded-lg shadow py-4 flex justify-content align-middle text-left mb-6">
             <div action="" className="mx-auto">
               <Input
-                userInfo={userInfo}
                 handleChange={handleChange}
                 type="text"
                 name="First Name"
               />
+              <Input handleChange={handleChange} type="text" name="Last Name" />
               <Input
-                userInfo={userInfo}
-                handleChange={handleChange}
-                type="text"
-                name="Last Name"
-              />
-              <Input
-                userInfo={userInfo}
                 handleChange={handleChange}
                 type="date"
                 name="Date of Birth"
               />
               <Input
-                userInfo={userInfo}
                 handleChange={handleChange}
                 type="date"
                 name="Start Date"
@@ -101,36 +93,19 @@ to true. If it doesn't, it sets the hasError state to false. */
               Address
             </h3>
             <div action="" className="mx-auto">
-              <Input
-                userInfo={userInfo}
-                handleChange={handleChange}
-                type="text"
-                name="Street"
-              />
-              <Input
-                userInfo={userInfo}
-                handleChange={handleChange}
-                type="text"
-                name="City"
-              />
+              <Input handleChange={handleChange} type="text" name="Street" />
+              <Input handleChange={handleChange} type="text" name="City" />
               <Select
-                userInfo={userInfo}
                 handleChange={handleChange}
                 data={SELECT_DATA[0]['state']}
                 name="state"
               />
-              <Input
-                userInfo={userInfo}
-                handleChange={handleChange}
-                type="text"
-                name="Zip Code"
-              />
+              <Input handleChange={handleChange} type="text" name="Zip Code" />
             </div>
           </div>
           <div className="bg-white rounded-lg shadow py-4 flex flex-col justify-center align-middle text-left mb-6">
             <div action="" className="mx-auto">
               <Select
-                userInfo={userInfo}
                 handleChange={handleChange}
                 data={SELECT_DATA[0]['department']}
                 name="department"

@@ -5,13 +5,12 @@ import { useState } from 'react';
  * This function is a React component that renders a select element with options that are passed in as
  * props
  * @param {object} props
- * @param {Object} props.userInfo parent state
  * @param {Function} props.handleChange parent state handler
  * @param {Array} props.data list of select needed
  * @param {String} props.name
  * @returns A select element with options.
  */
-function Select({ userInfo, handleChange, data, name }) {
+function Select({ handleChange, data, name }) {
   let [isValid, setIsValid] = useState(false);
   let [hasError, setHasError] = useState(false);
 
@@ -44,7 +43,7 @@ function Select({ userInfo, handleChange, data, name }) {
       </label>
       <select
         id={name}
-        className={`border-solid border rounded-md mb-4 w-64 h-7 ${
+        className={`border-solid rounded-md mb-4 w-64 h-7 ${
           isValid
             ? 'border-green-600 border-2'
             : hasError
@@ -66,7 +65,6 @@ function Select({ userInfo, handleChange, data, name }) {
 }
 
 Select.propTypes = {
-  userInfo: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   data: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
