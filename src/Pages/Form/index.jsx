@@ -2,7 +2,8 @@ import Input from '../../Components/Input';
 import Select from '../../Components/Select';
 
 import SELECT_DATA from '../../data/SELECT_DATA.json';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { ModalContext } from '../../utils/context';
 
 /**
  * The Employee function returns a form that takes in user information and then saves it to the
@@ -25,6 +26,8 @@ function Employee() {
   const [userInfo, setUserInfo] = useState(userMockup);
 
   const [hasError, setHasError] = useState(true);
+
+  const { toggleIsSaved } = useContext(ModalContext);
 
   /**
    * The function takes in an event and a name, and then sets the userInfo state to the current userInfo
@@ -55,6 +58,7 @@ to true. If it doesn't, it sets the hasError state to false. */
       array.push(userInfo);
       localStorage.setItem('savedUsers', JSON.stringify(array));
     }
+    toggleIsSaved();
   }
 
   return (
