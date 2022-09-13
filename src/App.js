@@ -12,16 +12,16 @@ import Employees from './Pages/Employees';
  * @returns The App component is being returned.
  */
 function App() {
-  const { isSaved } = useContext(ModalContext);
+  const { isSaved, toggleIsSaved } = useContext(ModalContext);
 
   return (
     <div className="App grid grid-cols-4 bg-slate-200">
-      {isSaved ? <Modal /> : null}
       <Navbar />
       <Routes>
         <Route path="" element={<Form />} />
         <Route path="/employees" element={<Employees />} />
       </Routes>
+      <Modal isOpen={isSaved} toggleModal={toggleIsSaved} />
     </div>
   );
 }

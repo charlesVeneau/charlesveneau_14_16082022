@@ -1,40 +1,53 @@
 import { CheckCircleIcon } from '@heroicons/react/solid';
 import { XIcon } from '@heroicons/react/outline';
+import { Dialog, Transition } from '@headlessui/react';
 import { NavLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { ModalContext } from '../../utils/context';
+import { useRef } from 'react';
 
 /**
  * It's a modal that displays a success message when an employee is added
  * @returns A modal component that is rendered when the isSaved state is true.
  */
-function Modal() {
-  const { toggleIsSaved } = useContext(ModalContext);
+function Modal({ isOpen, toggleModal }) {
+  const closeButton = useRef(null);
 
   return (
-    <div
-      id="modal-block"
-      className="fixed top-0 w-full h-screen flex justify-center items-center overflow-hidden bg-slate-600/75"
+    <Transition
+      show={isOpen}
+      enter="transition duration-100 ease-out"
+      enterFrom="transform scale-95 opacity-0"
+      enterTo="transform scale-100 opacity-100"
+      leave="transition duration-75 ease-out"
+      leaveFrom="transform scale-100 opacity-100"
+      leaveTo="transform scale-95 opacity-0"
     >
-      <div
-        id="modal-elt"
-        className="relative w-3/4 h-auto flex justify-center flex-col items-center bg-white rounded-lg text-gray-700 pb-4 drop-shadow-xl"
+      <Dialog
+        initialFocus={closeButton}
+        onClose={() => toggleModal()}
+        id="modal-block"
+        className="fixed top-0 w-full h-screen flex justify-center items-center overflow-hidden bg-slate-600/75"
       >
-        <XIcon
-          className="w-6 h-6 absolute top-2 right-2 hover:cursor-pointer hover:scale-125 transition-all origin-center"
-          onClick={() => toggleIsSaved()}
-        />
-        <CheckCircleIcon className="w-1/4 text-green-300" />
-        <h3 className="text-2xl font-bold">Success!</h3>
-        <p>Employee added successfully!</p>
-        <NavLink
-          to="employees"
-          className="underline underline-offset-4 text-gray-600/40 hover:text-gray-600 transition-colors"
+        <Dialog.Panel
+          id="modal-elt"
+          className="relative w-3/4 h-auto flex justify-center flex-col items-center bg-white rounded-lg text-gray-700 pb-4 drop-shadow-xl"
         >
-          Employees list
-        </NavLink>
-      </div>
-    </div>
+          <XIcon
+            ref={closeButton}
+            className="w-6 h-6 absolute top-2 right-2 hover:cursor-pointer hover:scale-125 transition-all origin-center"
+            onClick={() => toggleModal()}
+          />
+          <CheckCircleIcon className="w-1/4 text-green-300" />
+          <Dialog.Title className="text-2xl font-bold">Success!</Dialog.Title>
+          <p>Employee added successfully!</p>
+          <NavLink
+            to="employees"
+            className="underline underline-offset-4 text-gray-600/40 hover:text-gray-600 transition-colors"
+          >
+            Employees list
+          </NavLink>
+        </Dialog.Panel>
+      </Dialog>
+    </Transition>
   );
 }
 
