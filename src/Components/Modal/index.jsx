@@ -2,7 +2,7 @@ import { CheckCircleIcon } from '@heroicons/react/solid';
 import { XIcon } from '@heroicons/react/outline';
 import { Dialog, Transition } from '@headlessui/react';
 import { NavLink } from 'react-router-dom';
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 
 /**
  * It's a modal that displays a success message when an employee is added
@@ -20,6 +20,7 @@ function Modal({ isOpen, toggleModal }) {
       leave="transition duration-75 ease-out"
       leaveFrom="transform scale-100 opacity-100"
       leaveTo="transform scale-95 opacity-0"
+      as={Fragment}
     >
       <Dialog
         initialFocus={closeButton}
