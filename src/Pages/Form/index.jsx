@@ -62,14 +62,14 @@ to true. If it doesn't, it sets the hasError state to false. */
   }
 
   return (
-    <article className="col-span-3 my-4 mx-8 text-right">
-      <h2 className="font-bold text-2xl text-center text-gray-900 mb-6">
+    <article className="col-span-3 my-4 mx-4 sm:mx-8 text-right">
+      <h2 className="font-bold text-xl md:text-2xl text-center text-gray-900 mb-6">
         Create Employee
       </h2>
-      <div className="mx-auto w-4/5">
+      <div className="mx-auto sm:w-4/5">
         <form action="">
           <div className="bg-white rounded-lg shadow py-4 flex justify-content align-middle text-left mb-6">
-            <div action="" className="mx-auto">
+            <div className="mx-auto w-5/6 md:w-auto">
               <Input
                 handleChange={handleChange}
                 type="text"
@@ -92,7 +92,7 @@ to true. If it doesn't, it sets the hasError state to false. */
             <h3 className="font-bold text-xl text-gray-900 mb-4 mx-auto">
               Address
             </h3>
-            <div action="" className="mx-auto">
+            <div className="mx-auto w-5/6 md:w-auto">
               <Input handleChange={handleChange} type="text" name="Street" />
               <Input handleChange={handleChange} type="text" name="City" />
               <Select
@@ -104,7 +104,7 @@ to true. If it doesn't, it sets the hasError state to false. */
             </div>
           </div>
           <div className="bg-white rounded-lg shadow py-4 flex flex-col justify-center align-middle text-left mb-6">
-            <div action="" className="mx-auto">
+            <div className="mx-auto w-5/6 md:w-auto">
               <Select
                 handleChange={handleChange}
                 data={SELECT_DATA[0]['department']}

@@ -43,7 +43,7 @@ function Select({ handleChange, data, name }) {
       </label>
       <select
         id={name}
-        className={`border-solid rounded-md mb-4 w-64 h-7 ${
+        className={`border-solid rounded-md mb-4 w-full md:w-64 h-7 ${
           isValid
             ? 'border-green-600 border-2'
             : hasError

@@ -79,7 +79,7 @@ function Input({ handleChange, type, name }) {
         type={type}
         name={getName(name)}
         id={getName(name)}
-        className={`border-solid rounded-md mb-4 w-64 ${
+        className={`border-solid rounded-md mb-4 w-full md:w-64 ${
           isValid
             ? 'border-green-600 border-2'
             : hasError
