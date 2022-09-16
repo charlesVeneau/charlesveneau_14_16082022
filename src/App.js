@@ -15,7 +15,7 @@ function App() {
   const { isSaved, toggleIsSaved } = useContext(ModalContext);
 
   return (
-    <div className="App grid grid-cols-4 bg-slate-200">
+    <div className="App sm:grid sm:grid-cols-7 md:grid-cols-4 bg-slate-200">
       <Navbar />
       <Routes>
         <Route path="" element={<Form />} />
