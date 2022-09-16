@@ -62,7 +62,7 @@ to true. If it doesn't, it sets the hasError state to false. */
   }
 
   return (
-    <article className="sm:col-span-5 md:col-span-3 py-4 sm:p-0 sm:my-4 md:mx-8 text-right">
+    <article className="sm:col-span-5 md:col-span-3 py-4 sm:p-0 sm:my-4 mx-4 md:mx-8 text-right">
       <h2 className="font-bold text-xl md:text-2xl text-center text-gray-900 mb-6">
         Create Employee
       </h2>
