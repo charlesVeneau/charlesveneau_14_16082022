@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <aside className="fixed sm:relative bottom-0 bg-slate-200 w-full sm:col-span-2 md:col-span-1 p-4 sm:p-2 pt-4">
+    <aside className="fixed sm:relative bottom-0 bg-slate-200 w-full sm:col-span-2 md:col-span-1 p-4 sm:p-2 pt-4 z-20">
       <h1 className="text-center hidden sm:text-2xl md:text-3xl sm:flex sm:align-center gap-2 mb-6 font-bold text-gray-900 ">
         <img
           src={Logo}
