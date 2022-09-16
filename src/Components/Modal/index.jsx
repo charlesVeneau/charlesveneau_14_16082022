@@ -30,14 +30,14 @@ function Modal({ isOpen, toggleModal }) {
       >
         <Dialog.Panel
           id="modal-elt"
-          className="relative w-3/4 h-auto flex justify-center flex-col items-center bg-white rounded-lg text-gray-700 pb-4 drop-shadow-xl"
+          className="relative p-6 sm:p-2 w-11/12 sm:w-3/4 h-auto flex justify-center flex-col items-center bg-white rounded-lg text-gray-700 pb-4 drop-shadow-xl"
         >
           <XIcon
             ref={closeButton}
             className="w-6 h-6 absolute top-2 right-2 hover:cursor-pointer hover:scale-125 transition-all origin-center"
             onClick={() => toggleModal()}
           />
-          <CheckCircleIcon className="w-1/4 text-green-300" />
+          <CheckCircleIcon className="w-28 sm:w-1/4 text-green-300" />
           <Dialog.Title className="text-2xl font-bold">Success!</Dialog.Title>
           <p>Employee added successfully!</p>
           <NavLink
