@@ -70,6 +70,25 @@ function Input({ handleChange, type, name }) {
     return temp.join('');
   }
 
+  /**
+   * It returns a string of the current date minus the number of years passed in as an argument
+   * @returns A string with the date in the format of YYYY-MM-DD
+   */
+  function getLimiteDate(limit) {
+    const today = new Date();
+    const year = today.getFullYear() - limit;
+    const month = () => {
+      const tempMonth = today.getMonth();
+      return tempMonth < 10 ? '0' + (tempMonth + 1) : tempMonth;
+    };
+    const date = () => {
+      const tempDate = today.getDate();
+      return tempDate < 10 ? '0' + tempDate : tempDate;
+    };
+    console.log(`${year}-${month()}-${date()}`);
+    return `${year}-${month()}-${date()}`;
+  }
+
   return (
     <div className="inputElt">
       <label htmlFor={getName(name)} className="block my-2">
@@ -87,12 +106,15 @@ function Input({ handleChange, type, name }) {
             : 'border-slate-300 border'
         }`}
         onChange={handleError}
+        max={name === 'Date of Birth' ? getLimiteDate(18) : null}
+        min={name === 'Date of Birth' ? getLimiteDate(75) : null}
       />
     </div>
   );
 }
 
 Input.propTypes = {
+  handleChange: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
