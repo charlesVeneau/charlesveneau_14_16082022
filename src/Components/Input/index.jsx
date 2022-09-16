@@ -21,41 +21,35 @@ function Input({ handleChange, type, name }) {
    * at least 2 characters long, then set the isValid state to false, set the hasError state to true
    */
   function handleError(event) {
+    /* A regular expression that checks if the input is 5 digits long. */
+    const zipCodeRegex = /^\d{5}$/;
+
+    /* A regular expression that checks if the input is at least 2 characters long. */
+    const nameRegex = /^[a-zA-Z\-\s]{2,}$/;
+
+    /* Checking if the input is at least 2 characters long and if it has a number at the beginning. */
+    const stringRegex = /^\d{1,}\s{1}[a-zA-Z\-\s']{2,}$/;
+
+    /* A regular expression that checks if the input is in the format of YYYY-MM-DD */
+    const dateRegex = /^\d{4}[-]\d{2}[-]\d{2}$/;
+
+    /* Checking if the input is valid. If it is, then it sets the isValid state to true, sets the
+    hasError state to false, and calls the handleChange function with the input value and the name
+    of the input. If the input is not valid, then it sets the isValid state to false, sets the
+    hasError state to true. */
     if (
-      getName(name) === 'firstName' ||
-      getName(name) === 'lastName' ||
-      getName(name) === 'city' ||
-      getName(name) === 'street'
+      (['firstName', 'lastName', 'city'].includes(getName(name)) &&
+        nameRegex.test(event.target.value)) ||
+      (getName(name) === 'street' && stringRegex.test(event.target.value)) ||
+      (getName(name) === 'zipCode' && zipCodeRegex.test(event.target.value)) ||
+      (event.target.type === 'date' && dateRegex.test(event.target.value))
     ) {
-      if (/^.{2,}$/.test(event.target.value)) {
-        setIsValid(true);
-        setHasError(false);
-        handleChange(event.target.value, getName(name));
-      } else {
-        setIsValid(false);
-        setHasError(true);
-      }
-    } else if (getName(name) === 'zipCode') {
-      if (/^\d{2,}$/.test(event.target.value)) {
-        setIsValid(true);
-        setHasError(false);
-        handleChange(event.target.value, getName(name));
-      } else {
-        setIsValid(false);
-        setHasError(true);
-      }
-    } else if (
-      getName(name) === 'dateofBirth' ||
-      getName(name) === 'startDate'
-    ) {
-      if (/^\d{4}[-]\d{2}[-]\d{2}$/.test(event.target.value)) {
-        setIsValid(true);
-        setHasError(false);
-        handleChange(event.target.value, getName(name));
-      } else {
-        setIsValid(false);
-        setHasError(true);
-      }
+      setIsValid(true);
+      setHasError(false);
+      handleChange(event.target.value, getName(name));
+    } else {
+      setIsValid(false);
+      setHasError(true);
     }
   }
 
@@ -85,7 +79,6 @@ function Input({ handleChange, type, name }) {
       const tempDate = today.getDate();
       return tempDate < 10 ? '0' + tempDate : tempDate;
     };
-    console.log(`${year}-${month()}-${date()}`);
     return `${year}-${month()}-${date()}`;
   }
 
@@ -108,6 +101,7 @@ function Input({ handleChange, type, name }) {
         onChange={handleError}
         max={name === 'Date of Birth' ? getLimiteDate(18) : null}
         min={name === 'Date of Birth' ? getLimiteDate(75) : null}
+        maxLength={name === 'Zip Code' ? 5 : null}
       />
     </div>
   );
