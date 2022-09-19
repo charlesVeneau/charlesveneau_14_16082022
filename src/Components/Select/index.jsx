@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './style.css';
 import { useState } from 'react';
 
 /**
@@ -12,18 +13,26 @@ import { useState } from 'react';
  */
 function Select({ handleChange, data, name }) {
   let [isValid, setIsValid] = useState(false);
+  let [isVisible, setIsVisible] = useState(false);
   let [hasError, setHasError] = useState(false);
+  let [selectValue, setSelectValue] = useState('NULL');
 
   function handleError(event) {
-    if (event.target.value === 'NULL') {
+    const value =
+      event.target.nodeName === 'DIV'
+        ? event.target.getAttribute('data-value')
+        : event.target.value;
+    if (value === 'NULL') {
       setIsValid(false);
       setHasError(true);
       handleChange(null, getName(name));
     } else {
       setIsValid(true);
       setHasError(false);
-      handleChange(event.target.value, getName(name));
+      handleChange(value, getName(name));
     }
+    setIsVisible(false);
+    setSelectValue(value);
   }
 
   /**
@@ -36,30 +45,77 @@ function Select({ handleChange, data, name }) {
     else return name;
   }
 
+  function handleCustomSelect(event) {
+    setIsVisible(() => {
+      return isVisible ? false : true;
+    });
+    document.addEventListener('keydown', keyboardEventHandler);
+  }
+
+  function keyboardEventHandler(event) {
+    if (event.key === 'Escape') {
+      setIsVisible(false);
+      document.removeEventListener('keydown', keyboardEventHandler);
+    }
+  }
+
+  const selectClasses = 'border-solid rounded-md mb-4 w-full md:w-64 h-7';
+
   return (
-    <div>
-      <label htmlFor={name} className="capitalize block my-2">
+    <div className="relative">
+      <span id={name} className="capitalize block my-2 selectLabel">
         {name}
-      </label>
-      <select
-        id={name}
-        className={`border-solid rounded-md mb-4 w-full md:w-64 h-7 ${
-          isValid
-            ? 'border-green-600 border-2'
-            : hasError
-            ? 'border-red-500 border-2'
-            : 'border-slate-300 border'
-        }`}
-        onChange={handleError}
-      >
-        {data.map((element) => {
-          return (
-            <option key={element.abbrev} value={element.abbrev}>
-              {element.label}
-            </option>
-          );
-        })}
-      </select>
+      </span>
+      <div className="relative">
+        <select
+          id={name}
+          aria-labelledby={name}
+          className={`selectNative js-selectNative ${selectClasses} ${
+            isValid
+              ? 'border-green-600 border-2'
+              : hasError
+              ? 'border-red-500 border-2'
+              : 'border-slate-300 border'
+          }`}
+          onChange={handleError}
+          value={selectValue}
+        >
+          {data.map((element) => {
+            return (
+              <option key={element.abbrev} value={element.abbrev}>
+                {element.label}
+              </option>
+            );
+          })}
+        </select>
+        <div
+          className={`selectCustom js-selectCustom ${selectClasses}`}
+          aria-hidden={isVisible ? 'false' : 'true'}
+        >
+          <div
+            className="selectCustom-trigger w-full md: w64 h-7"
+            onClick={handleCustomSelect}
+          ></div>
+          <div
+            className={`selectCustom-opts mt-2 rounded-md bg-white shadow-md border-slate-400 h-80 overflow-scroll overflow-x-hidden ${
+              isVisible ? 'block' : 'hidden'
+            }`}
+          >
+            {data.map((element) => {
+              return (
+                <div
+                  key={element.abbrev}
+                  data-value={element.abbrev}
+                  className="selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer"
+                  onClick={handleError}
+                >
+                  {element.label}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,21 @@
+.selectNative,
+.selectCustom {
+  position: relative;
+}
+
+.selectCustom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 20;
+}
+
+@media (hover: hover) {
+  .selectNative:focus + .selectCustom {
+    display: none;
+  }
+  .selectCustom {
+    display: block;
+  }
+}
