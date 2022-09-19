@@ -49,13 +49,18 @@ function Select({ handleChange, data, name }) {
     setIsVisible(() => {
       return isVisible ? false : true;
     });
-    document.addEventListener('keydown', keyboardEventHandler);
+    document.addEventListener('keydown', customSelectEventHandler);
+    document.addEventListener('mousedown', customSelectEventHandler);
   }
 
-  function keyboardEventHandler(event) {
-    if (event.key === 'Escape') {
+  function customSelectEventHandler(event) {
+    if (
+      event.key === 'Escape' ||
+      !event.target.className.includes('selectCustom-opt')
+    ) {
       setIsVisible(false);
-      document.removeEventListener('keydown', keyboardEventHandler);
+      document.removeEventListener('keydown', customSelectEventHandler);
+      document.removeEventListener('mousedown', customSelectEventHandler);
     }
   }
 
