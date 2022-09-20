@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.2.1",
     "autoprefixer": "^10.4.8",
     "better-docs": "^2.7.2",
+    "gh-pages": "^4.0.0",
     "jsdoc": "^3.6.11",
     "postcss": "^8.4.16",
     "react": "^18.2.0",
@@ -19,8 +20,11 @@
     "tailwindcss": "^3.1.8",
     "web-vitals": "^2.1.0"
   },
+  "homepage": "https://charlesVeneau.github.io/charlesveneau_14_16082022",
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages-d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
