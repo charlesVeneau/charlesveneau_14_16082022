@@ -16,6 +16,7 @@ function Select({ handleChange, data, name }) {
   let [isVisible, setIsVisible] = useState(false);
   let [hasError, setHasError] = useState(false);
   let [selectValue, setSelectValue] = useState('NULL');
+  let [hoverValue, setHoverValue] = useState(0);
 
   function handleError(event) {
     const value =
@@ -54,6 +55,7 @@ function Select({ handleChange, data, name }) {
   }
 
   function customSelectEventHandler(event) {
+    console.log(event.key);
     if (
       event.key === 'Escape' ||
       !event.target.className.includes('selectCustom-opt')
@@ -61,6 +63,11 @@ function Select({ handleChange, data, name }) {
       setIsVisible(false);
       document.removeEventListener('keydown', customSelectEventHandler);
       document.removeEventListener('mousedown', customSelectEventHandler);
+    }
+    if (event.key === 'ArrowDown') {
+      setHoverValue(() => {
+        hoverValue = hoverValue++;
+      });
     }
   }
 
@@ -106,12 +113,15 @@ function Select({ handleChange, data, name }) {
               isVisible ? 'block' : 'hidden'
             }`}
           >
-            {data.map((element) => {
+            {data.map((element, key) => {
               return (
                 <div
-                  key={element.abbrev}
+                  key={key}
+                  data-active={`cs_${key}`}
                   data-value={element.abbrev}
-                  className="selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer"
+                  className={`selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer ${
+                    key === hoverValue ? 'isActive' : ''
+                  }`}
                   onClick={handleError}
                 >
                   {element.label}
