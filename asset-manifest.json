@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/charlesveneau_14_16082022/static/css/main.713c9302.css",
+    "main.js": "/charlesveneau_14_16082022/static/js/main.d11dcf88.js",
+    "static/js/787.17be12ae.chunk.js": "/charlesveneau_14_16082022/static/js/787.17be12ae.chunk.js",
+    "static/media/logoPNG.png": "/charlesveneau_14_16082022/static/media/logoPNG.81d7c84819fb438f6dd8.png",
+    "index.html": "/charlesveneau_14_16082022/index.html",
+    "main.713c9302.css.map": "/charlesveneau_14_16082022/static/css/main.713c9302.css.map",
+    "main.d11dcf88.js.map": "/charlesveneau_14_16082022/static/js/main.d11dcf88.js.map",
+    "787.17be12ae.chunk.js.map": "/charlesveneau_14_16082022/static/js/787.17be12ae.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.713c9302.css",
+    "static/js/main.d11dcf88.js"
+  ]
+}
