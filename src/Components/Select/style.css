@@ -11,6 +11,11 @@
   z-index: 20;
 }
 
+.isActive {
+  color: white;
+  background-color: #2d86b6;
+}
+
 @media (hover: hover) {
   .selectNative:focus + .selectCustom {
     display: none;
