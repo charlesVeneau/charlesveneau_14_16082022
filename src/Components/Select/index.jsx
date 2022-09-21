@@ -119,7 +119,7 @@ function Select({ handleChange, data, name }) {
                   key={key}
                   data-active={`cs_${key}`}
                   data-value={element.abbrev}
-                  className={`selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer ${
+                  className={`selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer h-10 ${
                     key === hoverValue ? 'isActive' : ''
                   }`}
                   onClick={handleError}
