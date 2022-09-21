@@ -113,14 +113,14 @@ function Select({ handleChange, data, name }) {
               isVisible ? 'block' : 'hidden'
             }`}
           >
-            {data.map((element, key) => {
+            {data.map((element, index) => {
               return (
                 <div
-                  key={key}
-                  data-active={`cs_${key}`}
+                  key={index}
+                  data-active={index}
                   data-value={element.abbrev}
                   className={`selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer h-10 ${
-                    key === hoverValue ? 'isActive' : ''
+                    index === hoverValue ? 'isActive' : ''
                   }`}
                   onClick={handleError}
                 >
