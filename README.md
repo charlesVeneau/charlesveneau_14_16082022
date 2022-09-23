@@ -17,6 +17,8 @@ I develop with
 
 ![image](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/charlesVeneau/charlesveneau_14_16082022)
+
 ## Available scripts
 
 ### Install dependencies
