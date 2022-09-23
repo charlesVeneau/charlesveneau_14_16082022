@@ -16,12 +16,12 @@ function App() {
 
   return (
     <div className="App sm:grid sm:grid-cols-7 md:grid-cols-4 bg-slate-200">
+      <Modal isOpen={isSaved} toggleModal={toggleIsSaved} />
       <Navbar />
       <Routes>
         <Route path="" element={<Form />} />
         <Route path="/employees" element={<Employees />} />
       </Routes>
-      <Modal isOpen={isSaved} toggleModal={toggleIsSaved} />
     </div>
   );
 }

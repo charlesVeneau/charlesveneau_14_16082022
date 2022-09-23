@@ -26,7 +26,7 @@ function Modal({ isOpen, toggleModal }) {
         initialFocus={closeButton}
         onClose={() => toggleModal()}
         id="modal-block"
-        className="fixed top-0 w-full h-screen flex justify-center items-center overflow-hidden bg-slate-600/75"
+        className="fixed top-0 w-full h-screen flex justify-center items-center overflow-hidden bg-slate-600/75 z-50"
       >
         <Dialog.Panel
           id="modal-elt"
