@@ -43,6 +43,7 @@ function Modal({ isOpen, toggleModal }) {
           <NavLink
             to="employees"
             className="underline underline-offset-4 text-gray-600/40 hover:text-gray-600 transition-colors"
+            onClick={() => toggleModal()}
           >
             Employees list
           </NavLink>
