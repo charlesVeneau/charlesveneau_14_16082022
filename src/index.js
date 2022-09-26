@@ -4,14 +4,16 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import { ModalProvider } from './utils/context';
+import { ModalProvider, UsersProvider } from './utils/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <ModalProvider>
-      <App />
-    </ModalProvider>
+    <UsersProvider>
+      <ModalProvider>
+        <App />
+      </ModalProvider>
+    </UsersProvider>
   </BrowserRouter>
 );
 

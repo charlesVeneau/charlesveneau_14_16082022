@@ -3,7 +3,7 @@ import Select from '../../Components/Select';
 
 import SELECT_DATA from '../../data/SELECT_DATA.json';
 import { useState, useEffect, useContext } from 'react';
-import { ModalContext } from '../../utils/context';
+import { ModalContext, UsersContext } from '../../utils/context';
 
 /**
  * The Employee function returns a form that takes in user information and then saves it to the
@@ -28,6 +28,8 @@ function Employee() {
   const [hasError, setHasError] = useState(true);
 
   const { toggleIsSaved } = useContext(ModalContext);
+
+  const { addUser } = useContext(UsersContext);
 
   /**
    * The function takes in an event and a name, and then sets the userInfo state to the current userInfo
@@ -58,11 +60,12 @@ to true. If it doesn't, it sets the hasError state to false. */
       array.push(userInfo);
       localStorage.setItem('savedUsers', JSON.stringify(array));
     }
+    addUser(userInfo);
     toggleIsSaved();
   }
 
   return (
-    <article className="sm:col-span-5 md:col-span-3 pt-4 pb-24 sm:p-0 sm:my-4 mx-4 md:mx-8 text-right">
+    <article className="sm:col-span-5 md:col-span-3 p-4 pb-24 sm:p-0 sm:py-4  md:px-8 text-right bg-slate-200">
       <h2 className="font-bold text-xl md:text-2xl text-center text-gray-900 mb-6">
         Create Employee
       </h2>
