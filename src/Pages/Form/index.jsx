@@ -13,6 +13,7 @@ import { ModalContext, UsersContext } from '../../utils/context';
 
 function Employee() {
   const userMockup = {
+    id: null,
     firstName: null,
     lastName: null,
     dateofBirth: null,
@@ -54,9 +55,11 @@ to true. If it doesn't, it sets the hasError state to false. */
     const users = JSON.parse(localStorage.getItem('savedUsers'));
     const array = [];
     if (users) {
+      userInfo.id = users.length + 1;
       users.push(userInfo);
       localStorage.setItem('savedUsers', JSON.stringify(users));
     } else {
+      userInfo.id = 1;
       array.push(userInfo);
       localStorage.setItem('savedUsers', JSON.stringify(array));
     }
