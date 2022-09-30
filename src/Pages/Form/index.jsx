@@ -13,7 +13,7 @@ import { ModalContext, UsersContext } from '../../utils/context';
 
 function Employee() {
   const userMockup = {
-    id: null,
+    id: 1,
     firstName: null,
     lastName: null,
     dateofBirth: null,
@@ -31,7 +31,6 @@ function Employee() {
   const { toggleIsSaved } = useContext(ModalContext);
 
   const { addUser } = useContext(UsersContext);
-
   /**
    * The function takes in an event and a name, and then sets the userInfo state to the current userInfo
    * state, but with the name property set to the event
@@ -55,7 +54,7 @@ to true. If it doesn't, it sets the hasError state to false. */
     const users = JSON.parse(localStorage.getItem('savedUsers'));
     const array = [];
     if (users) {
-      userInfo.id = users.length + 1;
+      userInfo.id = users.length;
       users.push(userInfo);
       localStorage.setItem('savedUsers', JSON.stringify(users));
     } else {
