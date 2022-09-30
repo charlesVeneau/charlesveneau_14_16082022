@@ -18,6 +18,14 @@ function Select({ handleChange, data, name }) {
   let [selectValue, setSelectValue] = useState('NULL');
   let [hoverValue, setHoverValue] = useState(0);
 
+  /**
+   * If the user clicks on the div, then get the value from the div's data-value attribute. If the user
+   * clicks on the input, then get the value from the input's value attribute. If the value is NULL, then
+   * set the isValid state to false, set the hasError state to true, set the selectValue state to null,
+   * and call the handleChange function with null and the name of the input. If the value is not NULL,
+   * then set the isValid state to true, set the hasError state to false, set the selectValue state to
+   * the value, and call the handleChange function with the value and the name of the input
+   */
   function handleError(event) {
     const value =
       event.target.nodeName === 'DIV'
@@ -26,14 +34,17 @@ function Select({ handleChange, data, name }) {
     if (value === 'NULL') {
       setIsValid(false);
       setHasError(true);
+      setSelectValue(null);
       handleChange(null, getName(name));
     } else {
       setIsValid(true);
       setHasError(false);
+      setSelectValue(value);
       handleChange(value, getName(name));
     }
     setIsVisible(false);
-    setSelectValue(value);
+    document.removeEventListener('keydown', customSelectEventHandler);
+    document.removeEventListener('mousedown', customSelectEventHandler);
   }
 
   /**
@@ -47,27 +58,50 @@ function Select({ handleChange, data, name }) {
   }
 
   function handleCustomSelect(event) {
-    setIsVisible(() => {
-      return isVisible ? false : true;
-    });
-    document.addEventListener('keydown', customSelectEventHandler);
-    document.addEventListener('mousedown', customSelectEventHandler);
+    const innerY = event.screenY - event.clientY;
+    console.log(innerY);
+
+    const newState = !isVisible;
+    setIsVisible(() => !isVisible);
+    setListeners(newState);
+  }
+
+  function handleHoverSelect(event) {
+    if (event === 'up') {
+      setHoverValue(() => hoverValue++);
+    }
+    if (event === 'down') {
+      setHoverValue(() => hoverValue--);
+    }
+  }
+
+  function setListeners(visible) {
+    if (visible) {
+      document.addEventListener('keydown', customSelectEventHandler);
+      document.addEventListener('mousedown', customSelectEventHandler);
+    } else {
+      document.removeEventListener('keydown', customSelectEventHandler);
+      document.removeEventListener('mousedown', customSelectEventHandler);
+    }
   }
 
   function customSelectEventHandler(event) {
-    console.log(event.key);
     if (
       event.key === 'Escape' ||
-      !event.target.className.includes('selectCustom-opt')
+      (event.type === 'mousedown' &&
+        !event.target.className.includes('selectCustom-opt'))
     ) {
       setIsVisible(false);
       document.removeEventListener('keydown', customSelectEventHandler);
       document.removeEventListener('mousedown', customSelectEventHandler);
     }
-    if (event.key === 'ArrowDown') {
-      setHoverValue(() => {
-        hoverValue = hoverValue++;
-      });
+    if (event.key === 'ArrowDown' && hoverValue < data.length) {
+      handleHoverSelect('up');
+    }
+    if (event.key === 'ArrowUp' && hoverValue >= 0) {
+      handleHoverSelect('down');
+    }
+    if (event.key === 'Enter' && hoverValue > 0) {
     }
   }
 
@@ -121,7 +155,7 @@ function Select({ handleChange, data, name }) {
                   data-value={element.abbrev}
                   className={`selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer h-10 ${
                     index === hoverValue ? 'isActive' : ''
-                  }`}
+                  } ${index === 0 ? 'hidden' : ''}`}
                   onClick={handleError}
                 >
                   {element.label}
