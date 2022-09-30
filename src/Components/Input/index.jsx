@@ -46,7 +46,12 @@ function Input({ handleChange, type, name }) {
     ) {
       setIsValid(true);
       setHasError(false);
-      handleChange(event.target.value, getName(name));
+      if (event.target.type === 'date') {
+        const isoDate = new Date(event.target.value).toISOString();
+        handleChange(isoDate, getName(name));
+      } else {
+        handleChange(event.target.value, getName(name));
+      }
     } else {
       setIsValid(false);
       setHasError(true);
