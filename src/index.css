@@ -15,3 +15,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer components {
+}
+
+@layer base {
+  h2 {
+    @apply font-bold text-xl md:text-2xl text-center text-gray-900 mb-6;
+  }
+  article {
+    @apply sm:col-span-5 md:col-span-3 p-4 pb-24 sm:p-0 sm:py-4  md:px-8 bg-slate-200;
+  }
+}

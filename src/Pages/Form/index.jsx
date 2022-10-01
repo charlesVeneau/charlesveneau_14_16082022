@@ -67,10 +67,8 @@ to true. If it doesn't, it sets the hasError state to false. */
   }
 
   return (
-    <article className="sm:col-span-5 md:col-span-3 p-4 pb-24 sm:p-0 sm:py-4  md:px-8 text-right bg-slate-200">
-      <h2 className="font-bold text-xl md:text-2xl text-center text-gray-900 mb-6">
-        Create Employee
-      </h2>
+    <article className="text-right">
+      <h2>Create Employee</h2>
       <div className="mx-auto sm:w-4/5">
         <form action="">
           <div className="bg-white rounded-lg shadow py-4 flex justify-content align-middle text-left mb-6">
