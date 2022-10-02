@@ -1,5 +1,10 @@
 import { useMemo } from 'react';
-import { useTable, useSortBy, useGlobalFilter } from 'react-table';
+import {
+  useTable,
+  useSortBy,
+  useGlobalFilter,
+  usePagination,
+} from 'react-table';
 import USERS from '../../data/USERS.json';
 import { COLUMNS } from '../Columns';
 import GlobalFilter from '../../Components/GlobalFilter';
@@ -18,24 +23,57 @@ function Table() {
       data,
     },
     useGlobalFilter,
-    useSortBy
+    useSortBy,
+    usePagination
   );
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    setPageSize,
     prepareRow,
     state,
     setGlobalFilter,
+    allColumns,
+    getToggleHideAllColumnsProps,
   } = tableInstance;
 
-  const { globalFilter } = state;
+  const { globalFilter, pageIndex, pageSize } = state;
 
   return (
     <>
       <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+      <div>
+        <div>
+          <label htmlFor="toggleAll">
+            <input
+              type="checkbox"
+              id="toggleAll"
+              {...getToggleHideAllColumnsProps()}
+            />
+            Toggle All
+          </label>
+        </div>
+        <div>
+          {allColumns.map((column) => (
+            <div key={column.id}>
+              <label>
+                <input type="checkbox" {...column.getToggleHiddenProps()} />
+                {column.Header}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
       <table {...getTableProps()} id="users">
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -60,7 +98,7 @@ function Table() {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -74,6 +112,51 @@ function Table() {
           })}
         </tbody>
       </table>
+      <div>
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to pag:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const pageNumber = e.target.value
+                ? Number(e.target.value) - 1
+                : 0;
+              gotoPage(pageNumber);
+            }}
+          />
+        </span>
+        <select
+          name="pageSize"
+          id=""
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[10, 25, 50].map((pageSize) => (
+            <option value={pageSize} key={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Previous
+        </button>
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          Next
+        </button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>
+      </div>
     </>
   );
 }
