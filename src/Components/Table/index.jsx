@@ -11,7 +11,7 @@ import GlobalFilter from '../../Components/GlobalFilter';
 import ChevronUpDownIcon from '../../assets/ChevronUpDownIcon.svg';
 import ChevronUpIcon from '../../assets/ChevronUpIcon.svg';
 import ChevronDownIcon from '../../assets/ChevronDownIcon.svg';
-import './style.css';
+//import './style.css';
 
 function Table() {
   const columns = useMemo(() => COLUMNS, []);

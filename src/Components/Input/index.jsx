@@ -96,13 +96,13 @@ function Input({ handleChange, type, name }) {
         type={type}
         name={getName(name)}
         id={getName(name)}
-        className={`border-solid rounded-md mb-4 w-full md:w-64 ${
+        className={
           isValid
             ? 'border-green-600 border-2'
             : hasError
             ? 'border-red-500 border-2'
             : 'border-slate-300 border'
-        }`}
+        }
         onChange={handleError}
         max={name === 'Date of Birth' ? getLimiteDate(18) : null}
         min={name === 'Date of Birth' ? getLimiteDate(75) : null}

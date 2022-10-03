@@ -16,7 +16,7 @@ function App() {
   const { isSaved, toggleIsSaved } = useContext(ModalContext);
 
   return (
-    <div className="App sm:grid sm:grid-cols-7 md:grid-cols-4 bg-slate-200 w-full h-full">
+    <div className="App">
       <Modal isOpen={isSaved} toggleModal={toggleIsSaved} />
       <Navbar />
       <Routes>

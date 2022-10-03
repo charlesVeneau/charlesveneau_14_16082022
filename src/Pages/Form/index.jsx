@@ -71,8 +71,8 @@ to true. If it doesn't, it sets the hasError state to false. */
       <h2>Create Employee</h2>
       <div className="mx-auto sm:w-4/5">
         <form action="">
-          <div className="bg-white rounded-lg shadow py-4 flex justify-content align-middle text-left mb-6">
-            <div className="mx-auto w-5/6 md:w-auto">
+          <div className="form_block flex align-middle text-left justify-content">
+            <div className="block_elt">
               <Input
                 handleChange={handleChange}
                 type="text"
@@ -91,11 +91,9 @@ to true. If it doesn't, it sets the hasError state to false. */
               />
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow py-4 flex flex-col justify-center align-middle text-left mb-6">
-            <h3 className="font-bold text-xl text-gray-900 mb-4 mx-auto">
-              Address
-            </h3>
-            <div className="mx-auto w-5/6 md:w-auto">
+          <div className="form_block form_block-center">
+            <h3>Address</h3>
+            <div className="block_elt">
               <Input handleChange={handleChange} type="text" name="Street" />
               <Input handleChange={handleChange} type="text" name="City" />
               <Select
@@ -106,8 +104,8 @@ to true. If it doesn't, it sets the hasError state to false. */
               <Input handleChange={handleChange} type="text" name="Zip Code" />
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow py-4 flex flex-col justify-center align-middle text-left mb-6">
-            <div className="mx-auto w-5/6 md:w-auto">
+          <div className="form_block form_block-center">
+            <div className="block_elt">
               <Select
                 handleChange={handleChange}
                 data={SELECT_DATA[0]['department']}
@@ -118,7 +116,7 @@ to true. If it doesn't, it sets the hasError state to false. */
         </form>
         <button
           type="submit"
-          className="mt-6 bg-green-600 text-slate-50 font-bold py-2 px-4 rounded hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-slate-400 transition"
+          className="button"
           disabled={hasError}
           onClick={saveUser}
         >
