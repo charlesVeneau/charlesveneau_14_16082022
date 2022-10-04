@@ -74,44 +74,53 @@ function Table() {
           ))}
         </div>
       </div>
-      <table {...getTableProps()} id="users">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  <img
-                    alt=""
-                    className="w-6 h-6"
-                    src={
-                      column.isSorted
-                        ? column.isSortedDesc
-                          ? ChevronDownIcon
-                          : ChevronUpIcon
-                        : ChevronUpDownIcon
-                    }
-                  />
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  );
-                })}
+      <div className="rounded-overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
+        <table {...getTableProps()} id="users">
+          <thead className="h-11">
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th
+                    className="bg-gray-200 sticky top-0 border-b border-gray-300 px-4 py-2 text-gray-600 font-bold uppercase cursor-pointer text-left"
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.render('Header')}
+                    <img
+                      alt=""
+                      className={`ml-3 inline ${
+                        column.isSorted ? 'h-4' : 'h-6'
+                      }`}
+                      src={
+                        column.isSorted
+                          ? column.isSortedDesc
+                            ? ChevronDownIcon
+                            : ChevronUpIcon
+                          : ChevronUpDownIcon
+                      }
+                    />
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr className="table-row h-10" {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td className="pl-2" {...cell.getCellProps()}>
+                        {cell.render('Cell')}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <div>
         <span>
           Page{' '}
