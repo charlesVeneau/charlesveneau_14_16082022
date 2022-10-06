@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   useTable,
   useSortBy,
@@ -14,6 +14,8 @@ import ChevronDownIcon from '../../assets/ChevronDownIcon.svg';
 //import './style.css';
 
 function Table() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => USERS, []);
 
@@ -49,6 +51,9 @@ function Table() {
 
   const { globalFilter, pageIndex, pageSize } = state;
 
+  function toggleModal(event) {
+    setModalOpen(() => !modalOpen);
+  }
   return (
     <>
       <div className=" mt-8 md:mt-16 flex justify-between my-4 items-center">
@@ -67,7 +72,10 @@ function Table() {
         <div className="flex gap-4 items-center">
           <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
           <div className="relative shadow">
-            <button className="rounded-lg inline-flex items-center bg-white hover:text-green-600 focus:outline-none focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4">
+            <button
+              className="rounded-lg inline-flex items-center bg-white hover:text-green-600 focus:outline-none focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4"
+              onClick={toggleModal}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-6 h-6 md:hidden"
@@ -98,7 +106,11 @@ function Table() {
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             </button>
-            <div className="z-40 absolute top-0 right-0 w-40 bg-white rounded-lg shadow-lg mt-12 -mr-1 block py-1 overflow-hidden">
+            <div
+              className={`z-40 absolute top-0 right-0 w-40 bg-white rounded-lg shadow-lg mt-12 -mr-1 py-1 overflow-hidden ${
+                modalOpen ? 'block' : 'hidden'
+              }`}
+            >
               <div>
                 <label
                   htmlFor="toggleAll"
@@ -117,7 +129,7 @@ function Table() {
               </div>
               {allColumns.map((column) => (
                 <div key={column.id}>
-                  <label className="flex justify-start items-center text-truncate hover:bg-green-100 px-4 py-2 cursor-pointer">
+                  <label className="flex justify-start items-center text-truncate hover:bg-green-100 px-4 py-2 cursor-pointer ">
                     <div className="text-green-600 mr-3">
                       <input
                         className="w-8 m-0 form-checkbox focus:outline-none focus:shadow-outline"
