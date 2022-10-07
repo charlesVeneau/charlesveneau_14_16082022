@@ -105,7 +105,7 @@ function Select({ handleChange, data, name }) {
     }
   }
 
-  const selectClasses = 'border-solid rounded-md mb-4 w-full md:w-64 h-7';
+  const selectClasses = 'border-solid rounded-md mb-4 w-full h-7';
 
   return (
     <div className="relative">
@@ -139,7 +139,7 @@ function Select({ handleChange, data, name }) {
           aria-hidden={isVisible ? 'false' : 'true'}
         >
           <div
-            className="selectCustom-trigger w-full md: w64 h-7"
+            className="selectCustom-trigger w-full h-7"
             onClick={handleCustomSelect}
           ></div>
           <div

@@ -56,7 +56,7 @@ function Table() {
   }
   return (
     <>
-      <div className=" mt-8 md:mt-16 flex justify-between my-4 items-center">
+      <div className=" mt-8 xl:mt-16 flex flex-col gap-3 sm:flex-row items-start sm:justify-between my-4 sm:items-center">
         <select
           name="pageSize"
           className="p-1 rounded-md"
@@ -69,7 +69,7 @@ function Table() {
             </option>
           ))}
         </select>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center justify-between sm:w-auto w-full">
           <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
           <div className="relative shadow">
             <button
@@ -152,7 +152,7 @@ function Table() {
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th
-                    className="bg-gray-200 sticky top-0 border-b border-gray-300 px-4 py-2 text-gray-600 font-bold uppercase cursor-pointer text-left"
+                    className="bg-gray-200 sticky top-0 border-b border-gray-300 px-4 py-2 text-gray-700 font-semibold uppercase cursor-pointer text-left"
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render('Header')}
@@ -192,7 +192,7 @@ function Table() {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-between my-4">
+      <div className="flex flex-col md:flex-row gap-3 md:gap-0 md:justify-between my-4">
         <div className="pageBlock">
           <span>
             Page{' '}
