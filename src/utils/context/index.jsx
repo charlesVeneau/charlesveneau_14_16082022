@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import USERS from '../../data/USERS.json';
 
 /* Creating a context object. */
 export const ModalContext = createContext();
@@ -27,7 +28,7 @@ export const UsersContext = createContext();
 export const UsersProvider = ({ children }) => {
   const localStorageUsers = JSON.parse(localStorage.getItem('savedUsers'));
   const [users, setUsers] = useState(
-    localStorageUsers ? localStorageUsers : []
+    localStorageUsers ? localStorageUsers : USERS
   );
 
   function addUser(user) {

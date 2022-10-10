@@ -1,11 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useContext } from 'react';
+import { UsersContext } from '../../utils/context';
 import {
   useTable,
   useSortBy,
   useGlobalFilter,
   usePagination,
 } from 'react-table';
-import USERS from '../../data/USERS.json';
 import { COLUMNS } from '../Columns';
 import GlobalFilter from '../../Components/GlobalFilter';
 import ChevronUpDownIcon from '../../assets/ChevronUpDownIcon.svg';
@@ -15,9 +15,10 @@ import ChevronDownIcon from '../../assets/ChevronDownIcon.svg';
 
 function Table() {
   const [modalOpen, setModalOpen] = useState(false);
+  const usersContext = useContext(UsersContext);
 
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => USERS, []);
+  const data = useMemo(() => usersContext.users, [usersContext]);
 
   const tableInstance = useTable(
     {
