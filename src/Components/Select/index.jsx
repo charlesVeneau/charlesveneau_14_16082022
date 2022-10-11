@@ -28,7 +28,7 @@ function Select({ handleChange, data, name }) {
    */
   function handleError(event) {
     const value =
-      event.target.nodeName === 'DIV'
+      event.target.nodeName === 'LI'
         ? event.target.getAttribute('data-value')
         : event.target.value;
     if (value === 'NULL') {
@@ -59,8 +59,7 @@ function Select({ handleChange, data, name }) {
 
   function handleCustomSelect(event) {
     const innerY = event.screenY - event.clientY;
-    console.log(innerY);
-
+    //console.log(innerY);
     const newState = !isVisible;
     setIsVisible(() => !isVisible);
     setListeners(newState);
@@ -78,31 +77,37 @@ function Select({ handleChange, data, name }) {
   function setListeners(visible) {
     if (visible) {
       document.addEventListener('keydown', customSelectEventHandler);
-      document.addEventListener('mousedown', customSelectEventHandler);
+      // document.addEventListener('mouseup', customSelectEventHandler);
     } else {
       document.removeEventListener('keydown', customSelectEventHandler);
-      document.removeEventListener('mousedown', customSelectEventHandler);
+      // document.removeEventListener('mouseup', customSelectEventHandler);
     }
   }
 
   function customSelectEventHandler(event) {
-    if (
-      event.key === 'Escape' ||
-      (event.type === 'mousedown' &&
-        !event.target.className.includes('selectCustom-opt'))
-    ) {
-      setIsVisible(false);
-      document.removeEventListener('keydown', customSelectEventHandler);
-      document.removeEventListener('mousedown', customSelectEventHandler);
+    if (event.key === 'Escape') {
+      closeCustomSelect();
     }
     if (event.key === 'ArrowDown' && hoverValue < data.length) {
+      event.preventDefault();
       handleHoverSelect('up');
     }
-    if (event.key === 'ArrowUp' && hoverValue >= 0) {
+    if (event.key === 'ArrowUp' && hoverValue > 0) {
+      event.preventDefault();
       handleHoverSelect('down');
     }
-    if (event.key === 'Enter' && hoverValue > 0) {
+    if (event.key === 'Enter') {
+      if (hoverValue > 0) {
+        setSelectValue(() => data[hoverValue - 1].abbrev);
+        closeCustomSelect();
+      }
     }
+  }
+
+  function closeCustomSelect() {
+    setIsVisible(() => false);
+    setHoverValue(() => 0);
+    setListeners(false);
   }
 
   const selectClasses = 'border-solid rounded-md mb-4 w-full h-7';
@@ -142,14 +147,14 @@ function Select({ handleChange, data, name }) {
             className="selectCustom-trigger w-full h-7"
             onClick={handleCustomSelect}
           ></div>
-          <div
+          <ul
             className={`selectCustom-opts mt-2 rounded-md bg-white shadow-md border-slate-400 h-80 overflow-scroll overflow-x-hidden ${
               isVisible ? 'block' : 'hidden'
             }`}
           >
             {data.map((element, index) => {
               return (
-                <div
+                <li
                   key={index}
                   data-active={index}
                   data-value={element.abbrev}
@@ -159,10 +164,10 @@ function Select({ handleChange, data, name }) {
                   onClick={handleError}
                 >
                   {element.label}
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </div>
