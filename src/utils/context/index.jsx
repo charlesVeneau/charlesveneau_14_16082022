@@ -26,10 +26,13 @@ export const ModalProvider = ({ children }) => {
 export const UsersContext = createContext();
 
 export const UsersProvider = ({ children }) => {
-  const localStorageUsers = JSON.parse(localStorage.getItem('savedUsers'));
-  const [users, setUsers] = useState(
-    localStorageUsers ? localStorageUsers : USERS
-  );
+  const localStorageUsers = () => {
+    if (!localStorage.getItem('savedUsers')) {
+      localStorage.setItem('savedUsers', JSON.stringify(USERS));
+    }
+    return JSON.parse(localStorage.getItem('savedUsers'));
+  };
+  const [users, setUsers] = useState(localStorageUsers);
 
   function addUser(user) {
     setUsers((users) => [...users, user]);
