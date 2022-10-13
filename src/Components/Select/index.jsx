@@ -91,6 +91,11 @@ function Select({ handleChange, data, name }) {
     if (event.key === 'ArrowDown' && hoverValue < data.length) {
       event.preventDefault();
       handleHoverSelect('up');
+      // console.log(element);
+      //  if (hoverValue >= 8) {
+      //    console.log(event.target.parentNode.scrollTop());
+      //    // event.target.parentNode.scrollTo()
+      //  }
     }
     if (event.key === 'ArrowUp' && hoverValue > 0) {
       event.preventDefault();
