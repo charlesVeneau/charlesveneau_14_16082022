@@ -77,8 +77,9 @@ function Input({ handleChange, type, name }) {
     const today = new Date();
     const year = today.getFullYear() - limit;
     const month = () => {
-      const tempMonth = today.getMonth();
-      return tempMonth < 10 ? '0' + (tempMonth + 1) : tempMonth;
+      const tempMonth = today.getMonth() + 1;
+      console.log(tempMonth);
+      return tempMonth < 10 ? '0' + tempMonth : tempMonth;
     };
     const date = () => {
       const tempDate = today.getDate();
