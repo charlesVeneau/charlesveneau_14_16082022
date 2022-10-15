@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './style.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 /**
  * This function is a React component that renders a select element with options that are passed in as
@@ -17,6 +17,13 @@ function Select({ handleChange, data, name }) {
   let [hasError, setHasError] = useState(false);
   let [selectValue, setSelectValue] = useState('NULL');
   let [hoverValue, setHoverValue] = useState(0);
+  const optionList = useRef(null);
+
+  const sortedData = data.sort(function (a, b) {
+    if (a.label < b.label) return -1;
+    if (a.label > b.label) return 1;
+    return 0;
+  });
 
   /**
    * If the user clicks on the div, then get the value from the div's data-value attribute. If the user
@@ -26,11 +33,19 @@ function Select({ handleChange, data, name }) {
    * then set the isValid state to true, set the hasError state to false, set the selectValue state to
    * the value, and call the handleChange function with the value and the name of the input
    */
-  function handleError(event) {
-    const value =
-      event.target.nodeName === 'LI'
-        ? event.target.getAttribute('data-value')
-        : event.target.value;
+  function handleError(event, type) {
+    let value = '';
+    if (type === 'click') {
+      value =
+        event.target.nodeName === 'LI'
+          ? event.target.getAttribute('data-value')
+          : event.target.value;
+    } else if (type === 'enter') {
+      console.log(event.getAttribute('data-value'));
+      value =
+        event.nodeName === 'LI' ? event.getAttribute('data-value') : 'NULL';
+    }
+
     if (value === 'NULL') {
       setIsValid(false);
       setHasError(true);
@@ -58,8 +73,8 @@ function Select({ handleChange, data, name }) {
   }
 
   function handleCustomSelect(event) {
-    const innerY = event.screenY - event.clientY;
-    //console.log(innerY);
+    // const innerY = event.screenY - event.clientY;
+    // console.log(innerY);
     const newState = !isVisible;
     setIsVisible(() => !isVisible);
     setListeners(newState);
@@ -85,26 +100,27 @@ function Select({ handleChange, data, name }) {
   }
 
   function customSelectEventHandler(event) {
+    const hoverElement = optionList.current.querySelector(
+      `li[data-active="${hoverValue - 1}"]`
+    );
     if (event.key === 'Escape') {
       closeCustomSelect();
     }
-    if (event.key === 'ArrowDown' && hoverValue < data.length) {
+    if (event.key === 'ArrowDown' && hoverValue < sortedData.length) {
       event.preventDefault();
       handleHoverSelect('up');
-      // console.log(element);
-      //  if (hoverValue >= 8) {
-      //    console.log(event.target.parentNode.scrollTop());
-      //    // event.target.parentNode.scrollTo()
-      //  }
+      hoverElement.scrollIntoView(false);
     }
     if (event.key === 'ArrowUp' && hoverValue > 0) {
       event.preventDefault();
       handleHoverSelect('down');
+      hoverElement.scrollIntoView(false);
     }
     if (event.key === 'Enter') {
       if (hoverValue > 0) {
-        setSelectValue(() => data[hoverValue - 1].abbrev);
-        closeCustomSelect();
+        // setSelectValue(() => sortedData[hoverValue - 1].abbrev);
+        // closeCustomSelect();
+        handleError(hoverElement, 'enter');
       }
     }
   }
@@ -133,10 +149,10 @@ function Select({ handleChange, data, name }) {
               ? 'border-red-500 border-2'
               : 'border-slate-300 border'
           }`}
-          onChange={handleError}
+          onChange={(e) => handleError(e, 'click')}
           value={selectValue}
         >
-          {data.map((element) => {
+          {sortedData.map((element) => {
             return (
               <option key={element.abbrev} value={element.abbrev}>
                 {element.label}
@@ -153,11 +169,12 @@ function Select({ handleChange, data, name }) {
             onClick={handleCustomSelect}
           ></div>
           <ul
-            className={`selectCustom-opts mt-2 rounded-md bg-white shadow-md border-slate-400 h-80 overflow-scroll overflow-x-hidden ${
+            ref={optionList}
+            className={`selectCustom-opts mt-2 mb-8 rounded-md bg-white shadow-md border-slate-400 h-80 overflow-scroll overflow-x-hidden ${
               isVisible ? 'block' : 'hidden'
             }`}
           >
-            {data.map((element, index) => {
+            {sortedData.map((element, index) => {
               return (
                 <li
                   key={index}
@@ -166,7 +183,7 @@ function Select({ handleChange, data, name }) {
                   className={`selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer h-10 ${
                     index === hoverValue ? 'isActive' : ''
                   } ${index === 0 ? 'hidden' : ''}`}
-                  onClick={handleError}
+                  onClick={(e) => handleError(e, 'click')}
                 >
                   {element.label}
                 </li>
