@@ -25,10 +25,10 @@ function Input({ handleChange, type, name }) {
     const zipCodeRegex = /^\d{5}$/;
 
     /* A regular expression that checks if the input is at least 2 characters long. */
-    const nameRegex = /^[a-zA-Z\-\s]{2,}$/;
+    const nameRegex = /^[a-zA-Zàâçéèêëîïôûùüÿñæœ\-\s]{2,}$/;
 
     /* Checking if the input is at least 2 characters long and if it has a number at the beginning. */
-    const stringRegex = /^\d{1,}\s{1}[a-zA-Z\-\s']{2,}$/;
+    const stringRegex = /^\d{1,}\s{1}[a-zA-Zàâçéèêëîïôûùüÿñæœ\-\s']{2,}$/;
 
     /* A regular expression that checks if the input is in the format of YYYY-MM-DD */
     const dateRegex = /^\d{4}[-]\d{2}[-]\d{2}$/;
@@ -78,7 +78,6 @@ function Input({ handleChange, type, name }) {
     const year = today.getFullYear() - limit;
     const month = () => {
       const tempMonth = today.getMonth() + 1;
-      console.log(tempMonth);
       return tempMonth < 10 ? '0' + tempMonth : tempMonth;
     };
     const date = () => {
@@ -97,7 +96,7 @@ function Input({ handleChange, type, name }) {
         type={type}
         name={getName(name)}
         id={getName(name)}
-        className={`w-full ${
+        className={`w-full pl-1 ${
           isValid
             ? 'border-green-600 border-2'
             : hasError
