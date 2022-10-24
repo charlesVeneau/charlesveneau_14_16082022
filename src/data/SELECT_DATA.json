@@ -2,11 +2,6 @@
   {
     "state": [
       {
-        "label": "",
-        "value": "NULL",
-        "abbrev": "NULL"
-      },
-      {
         "label": "Alabama",
         "value": "AL",
         "abbrev": "AL"
@@ -303,11 +298,6 @@
       }
     ],
     "department": [
-      {
-        "label": "",
-        "value": "NULL",
-        "abbrev": "NULL"
-      },
       {
         "abbrev": "SU",
         "value": "Support",
