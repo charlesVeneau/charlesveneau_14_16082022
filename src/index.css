@@ -114,3 +114,33 @@ code {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* Custom Select */
+
+@layer components {
+  .select,
+  .selectCustom {
+    @apply border-solid rounded-md mb-4 w-full h-7;
+  }
+  .select.isValid {
+    @apply border-green-600 border-2;
+  }
+  .select.hasError {
+    @apply border-solid rounded-md mb-4 w-full h-7;
+  }
+  .select.neutral {
+    @apply border-slate-300 border;
+  }
+  .selectCustom-trigger {
+    @apply h-7;
+  }
+  .selectCustom-opts {
+    @apply bg-white shadow-md border-slate-400 h-80 rounded-md;
+  }
+  .selectCustom-opt {
+    @apply hover:text-white hover:bg-slate-500 p-2 h-10;
+  }
+  .selectLabel {
+    @apply my-2;
+  }
+}
