@@ -41,35 +41,23 @@ function Select({ handleChange, data, name }) {
           ? event.target.getAttribute('data-value')
           : event.target.value;
     } else if (type === 'enter') {
-      console.log(event.getAttribute('data-value'));
       value =
         event.nodeName === 'LI' ? event.getAttribute('data-value') : 'NULL';
     }
-
     if (value === 'NULL') {
       setIsValid(false);
       setHasError(true);
       setSelectValue(null);
-      handleChange(null, getName(name));
+      handleChange(null, name);
     } else {
       setIsValid(true);
       setHasError(false);
       setSelectValue(value);
-      handleChange(value, getName(name));
+      handleChange(value, name);
     }
     setIsVisible(false);
     document.removeEventListener('keydown', customSelectEventHandler);
     document.removeEventListener('mousedown', customSelectEventHandler);
-  }
-
-  /**
-   * It takes a string as an argument and returns a different string based on the value of the argument.
-   * @returns the value of stateAbbrev if it is equal to 'state', otherwise it is returning the
-   * value of the name parameter.
-   */
-  function getName(name) {
-    if (name === 'state') return 'stateAbbrev';
-    else return name;
   }
 
   function handleCustomSelect(event) {
@@ -81,12 +69,13 @@ function Select({ handleChange, data, name }) {
   }
 
   function handleHoverSelect(event) {
-    if (event === 'up') {
+    if (event === 'down' && hoverValue < sortedData.length) {
       setHoverValue(() => hoverValue++);
     }
-    if (event === 'down') {
+    if (event === 'up' && hoverValue > 0) {
       setHoverValue(() => hoverValue--);
     }
+    getHoverElement().scrollIntoView({ block: 'center' });
   }
 
   function setListeners(visible) {
@@ -100,29 +89,33 @@ function Select({ handleChange, data, name }) {
   }
 
   function customSelectEventHandler(event) {
-    const hoverElement = optionList.current.querySelector(
-      `li[data-active="${hoverValue - 1}"]`
-    );
+    event.preventDefault();
     if (event.key === 'Escape') {
       closeCustomSelect();
-    }
-    if (event.key === 'ArrowDown' && hoverValue < sortedData.length) {
-      event.preventDefault();
-      handleHoverSelect('up');
-      hoverElement.scrollIntoView(false);
-    }
-    if (event.key === 'ArrowUp' && hoverValue > 0) {
-      event.preventDefault();
+    } else if (event.key === 'ArrowDown') {
       handleHoverSelect('down');
-      hoverElement.scrollIntoView(false);
-    }
-    if (event.key === 'Enter') {
-      if (hoverValue > 0) {
-        // setSelectValue(() => sortedData[hoverValue - 1].abbrev);
-        // closeCustomSelect();
-        handleError(hoverElement, 'enter');
+    } else if (event.key === 'ArrowUp') {
+      handleHoverSelect('up');
+    } else if (event.key === 'Enter') {
+      console.log(`hoverValue : ${hoverValue}`);
+      if (hoverValue >= 0) {
+        handleError(getHoverElement(), 'enter');
       }
+    } else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
+      //select the first occurence in the data array
+      const occurenceIndex = data
+        .map((child) => child.label.toLowerCase()[0])
+        .indexOf(event.key.toLowerCase());
+      setHoverValue(() => occurenceIndex);
+      document
+        .querySelector(`li[data-active="${occurenceIndex}"]`)
+        .scrollIntoView();
+      //getHoverElement().scrollIntoView();
     }
+  }
+
+  function getHoverElement() {
+    return optionList.current.querySelector(`li.isActive`);
   }
 
   function closeCustomSelect() {
@@ -131,23 +124,17 @@ function Select({ handleChange, data, name }) {
     setListeners(false);
   }
 
-  const selectClasses = 'border-solid rounded-md mb-4 w-full h-7';
-
   return (
-    <div className="relative">
-      <span id={name} className="capitalize block my-2 selectLabel">
-        {name}
-      </span>
-      <div className="relative">
+    <div className="relativeBlock">
+      <label id={name} className="selectLabel">
+        {name} {hoverValue}
+      </label>
+      <div className="relativeBlock">
         <select
           id={name}
           aria-labelledby={name}
-          className={`selectNative js-selectNative ${selectClasses} ${
-            isValid
-              ? 'border-green-600 border-2'
-              : hasError
-              ? 'border-red-500 border-2'
-              : 'border-slate-300 border'
+          className={`selectNative js-selectNative select ${
+            isValid ? 'isValid' : hasError ? 'hasError' : 'neutral'
           }`}
           onChange={(e) => handleError(e, 'click')}
           value={selectValue}
@@ -161,17 +148,17 @@ function Select({ handleChange, data, name }) {
           })}
         </select>
         <div
-          className={`selectCustom js-selectCustom ${selectClasses}`}
+          className={`selectCustom`}
           aria-hidden={isVisible ? 'false' : 'true'}
         >
           <div
-            className="selectCustom-trigger w-full h-7"
+            className="selectCustom-trigger"
             onClick={handleCustomSelect}
           ></div>
           <ul
             ref={optionList}
-            className={`selectCustom-opts mt-2 mb-8 rounded-md bg-white shadow-md border-slate-400 h-80 overflow-scroll overflow-x-hidden ${
-              isVisible ? 'block' : 'hidden'
+            className={`selectCustom-opts ${
+              isVisible ? 'isVisible' : 'isHidden'
             }`}
           >
             {sortedData.map((element, index) => {
@@ -180,9 +167,9 @@ function Select({ handleChange, data, name }) {
                   key={index}
                   data-active={index}
                   data-value={element.abbrev}
-                  className={`selectCustom-opt hover:text-white hover:bg-slate-500 p-2 cursor-pointer h-10 ${
+                  className={`selectCustom-opt ${
                     index === hoverValue ? 'isActive' : ''
-                  } ${index === 0 ? 'hidden' : ''}`}
+                  }`}
                   onClick={(e) => handleError(e, 'click')}
                 >
                   {element.label}
