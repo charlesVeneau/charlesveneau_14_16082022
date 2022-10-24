@@ -115,6 +115,25 @@ code {
   background-repeat: no-repeat;
 }
 
+/* Modal */
+
+@layer components {
+  .modal-elt {
+    @apply p-6 sm:p-2 w-11/12 sm:w-3/4 rounded-lg text-gray-700 drop-shadow-xl;
+  }
+  .modal-closeBtn {
+    @apply hover:cursor-pointer hover:scale-125 transition-all origin-center;
+  }
+  .modal-isValid {
+    @apply w-28 sm:w-1/4 text-green-300;
+  }
+  .modal-title {
+    @apply text-2xl font-bold;
+  }
+  .modal-link {
+    @apply underline underline-offset-4 text-gray-600/40 hover:text-gray-600 transition-colors;
+  }
+}
 /* Custom Select */
 
 @layer components {
