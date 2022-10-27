@@ -8,7 +8,7 @@ import { Fragment, useRef } from 'react';
  * It's a modal that displays a success message when an employee is added
  * @returns A modal component that is rendered when the isSaved state is true.
  */
-function Modal({ isOpen, toggleModal }) {
+function Modal({ isOpen, toggleModal, content }) {
   const closeButton = useRef(null);
 
   return (
@@ -38,14 +38,16 @@ function Modal({ isOpen, toggleModal }) {
             onClick={() => toggleModal()}
           />
           <CheckCircleIcon className="w-28 sm:w-1/4 text-green-300" />
-          <Dialog.Title className="text-2xl font-bold">Success!</Dialog.Title>
-          <p>Employee added successfully!</p>
+          <Dialog.Title className="text-2xl font-bold">
+            {content.ModalTitle}
+          </Dialog.Title>
+          <p>{content.modalText}</p>
           <NavLink
-            to="employees"
+            to={content.link}
             className="underline underline-offset-4 text-gray-600/40 hover:text-gray-600 transition-colors"
             onClick={() => toggleModal()}
           >
-            Employees list
+            {content.linkText}
           </NavLink>
         </Dialog.Panel>
       </Dialog>
