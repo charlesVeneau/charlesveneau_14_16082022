@@ -3992,9 +3992,9 @@
   "version" "3.1.0"
 
 "cv-custom-modal@^1.0.3":
-  "integrity" "sha512-tVZstbhNzOi1C6Ev5eH5KxknDN274XsHpa9nSFERTGkgrkY4lHctB0FqK84Y2hXdVbJYgXX44O01SQVQHji/WQ=="
-  "resolved" "https://registry.npmjs.org/cv-custom-modal/-/cv-custom-modal-1.0.5.tgz"
-  "version" "1.0.5"
+  "integrity" "sha512-8jVPPxlphVwi6cSre4vCCB35pTalBzBczxDqxcdKeig+yEE8uDFbH/Fti9mdeg7Reiwij8Iae2eRbZSVSsjtRg=="
+  "resolved" "https://registry.npmjs.org/cv-custom-modal/-/cv-custom-modal-1.0.9.tgz"
+  "version" "1.0.9"
 
 "damerau-levenshtein@^1.0.8":
   "integrity" "sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA=="

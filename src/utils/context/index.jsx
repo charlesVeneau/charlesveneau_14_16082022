@@ -10,14 +10,19 @@ export const ModalContext = createContext();
  * toggleIsSaved.
  */
 export const ModalProvider = ({ children }) => {
-  const [isSaved, setIsSaved] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  function toggleIsSaved() {
-    setIsSaved((isSaved) => !isSaved);
+  function closeModal() {
+    console.log('close Modal');
+    setIsOpen(false);
+  }
+  function openModal() {
+    console.log('open Modal');
+    setIsOpen(true);
   }
 
   return (
-    <ModalContext.Provider value={{ isSaved, toggleIsSaved }}>
+    <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
       {children}
     </ModalContext.Provider>
   );
