@@ -29,7 +29,7 @@ function App() {
       <Navbar />
       <Modal isOpen={isSaved} toggleModal={toggleIsSaved} content={content} />
       <Routes>
-        <Route path="" element={<Form />} />
+        <Route index element={<Form />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/*" element={<Error />} />
       </Routes>
