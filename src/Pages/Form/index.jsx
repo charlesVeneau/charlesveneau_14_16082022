@@ -28,7 +28,7 @@ function Employee() {
 
   const [hasError, setHasError] = useState(true);
 
-  const { toggleIsSaved } = useContext(ModalContext);
+  const { openModal } = useContext(ModalContext);
 
   const { addUser } = useContext(UsersContext);
   /**
@@ -63,7 +63,7 @@ to true. If it doesn't, it sets the hasError state to false. */
       localStorage.setItem('savedUsers', JSON.stringify(array));
     }
     addUser(userInfo);
-    toggleIsSaved();
+    openModal();
   }
 
   return (

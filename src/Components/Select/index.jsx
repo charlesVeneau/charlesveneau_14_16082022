@@ -48,16 +48,21 @@ function Select({ handleChange, data, name }) {
       setIsValid(false);
       setHasError(true);
       setSelectValue(null);
-      handleChange(null, name);
+      handleChange(null, getName(name));
     } else {
       setIsValid(true);
       setHasError(false);
       setSelectValue(value);
-      handleChange(value, name);
+      handleChange(value, getName(name));
     }
     setIsVisible(false);
     document.removeEventListener('keydown', customSelectEventHandler);
     document.removeEventListener('mousedown', customSelectEventHandler);
+  }
+
+  function getName(name) {
+    if (name === 'state') return 'stateAbbrev';
+    else return name;
   }
 
   function handleCustomSelect(event) {
@@ -75,7 +80,6 @@ function Select({ handleChange, data, name }) {
     if (event === 'up' && hoverValue > 0) {
       setHoverValue(() => hoverValue--);
     }
-    getHoverElement().scrollIntoView({ block: 'center' });
   }
 
   function setListeners(visible) {
@@ -94,8 +98,10 @@ function Select({ handleChange, data, name }) {
       closeCustomSelect();
     } else if (event.key === 'ArrowDown') {
       handleHoverSelect('down');
+      getHoverElement().scrollIntoView({ block: 'center' });
     } else if (event.key === 'ArrowUp') {
       handleHoverSelect('up');
+      getHoverElement().scrollIntoView({ block: 'center' });
     } else if (event.key === 'Enter') {
       console.log(`hoverValue : ${hoverValue}`);
       if (hoverValue >= 0) {
