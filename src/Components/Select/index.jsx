@@ -69,7 +69,7 @@ function Select({ handleChange, data, name }) {
     // const innerY = event.screenY - event.clientY;
     // console.log(innerY);
     const newState = !isVisible;
-    setIsVisible(() => !isVisible);
+    setIsVisible(!isVisible);
     setListeners(newState);
   }
 
@@ -85,15 +85,16 @@ function Select({ handleChange, data, name }) {
   function setListeners(visible) {
     if (visible) {
       document.addEventListener('keydown', customSelectEventHandler);
-      // document.addEventListener('mouseup', customSelectEventHandler);
+      document.addEventListener('mouseup', customSelectEventHandler);
     } else {
       document.removeEventListener('keydown', customSelectEventHandler);
-      // document.removeEventListener('mouseup', customSelectEventHandler);
+      document.removeEventListener('mouseup', customSelectEventHandler);
     }
   }
 
   function customSelectEventHandler(event) {
     event.preventDefault();
+
     if (event.key === 'Escape') {
       closeCustomSelect();
     } else if (event.key === 'ArrowDown') {
@@ -103,21 +104,29 @@ function Select({ handleChange, data, name }) {
       handleHoverSelect('up');
       getHoverElement().scrollIntoView({ block: 'center' });
     } else if (event.key === 'Enter') {
-      console.log(`hoverValue : ${hoverValue}`);
       if (hoverValue >= 0) {
         handleError(getHoverElement(), 'enter');
       }
-    } else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
-      //select the first occurence in the data array
-      const occurenceIndex = data
-        .map((child) => child.label.toLowerCase()[0])
-        .indexOf(event.key.toLowerCase());
-      setHoverValue(() => occurenceIndex);
-      document
-        .querySelector(`li[data-active="${occurenceIndex}"]`)
-        .scrollIntoView();
-      //getHoverElement().scrollIntoView();
+    } else if (event.type === 'mouseup') {
+      console.log(event.target.parentNode);
+      if (
+        !event.target.parentNode.getAttribute('aria-hidden') ||
+        event.target.parentNode.getAttribute('aria-hidden') === 'true'
+      ) {
+        setIsVisible(false);
+      }
     }
+    // else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
+    //   //select the first occurence in the data array
+    //   const occurenceIndex = data
+    //     .map((child) => child.label.toLowerCase()[0])
+    //     .indexOf(event.key.toLowerCase());
+    //   setHoverValue(() => occurenceIndex);
+    //   document
+    //     .querySelector(`li[data-active="${occurenceIndex}"]`)
+    //     .scrollIntoView({ block: 'center' });
+    //   //getHoverElement().scrollIntoView();
+    // }
   }
 
   function getHoverElement() {

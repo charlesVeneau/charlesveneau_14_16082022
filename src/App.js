@@ -2,7 +2,6 @@ import './App.css';
 import React, { useContext } from 'react';
 import { ModalContext } from './utils/context';
 import { Routes, Route } from 'react-router-dom';
-
 import Navbar from './Components/Navbar';
 import Form from './Pages/Form';
 import Employees from './Pages/Employees';

@@ -13,11 +13,9 @@ export const ModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
-    console.log('close Modal');
     setIsOpen(false);
   }
   function openModal() {
-    console.log('open Modal');
     setIsOpen(true);
   }
 
