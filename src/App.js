@@ -18,7 +18,7 @@ function App() {
   const content = {
     link: 'employees',
     linkText: 'Employees list',
-    modalTitle: 'Error !',
+    modalTitle: 'Success!',
     modalText: 'Employee added successfully!',
     status: 'success',
   };

@@ -94,7 +94,7 @@ function Select({ handleChange, data, name }) {
 
   function customSelectEventHandler(event) {
     event.preventDefault();
-
+    // console.log(event.type);
     if (event.key === 'Escape') {
       closeCustomSelect();
     } else if (event.key === 'ArrowDown') {
@@ -108,25 +108,26 @@ function Select({ handleChange, data, name }) {
         handleError(getHoverElement(), 'enter');
       }
     } else if (event.type === 'mouseup') {
-      console.log(event.target.parentNode);
       if (
         !event.target.parentNode.getAttribute('aria-hidden') ||
         event.target.parentNode.getAttribute('aria-hidden') === 'true'
       ) {
         setIsVisible(false);
       }
+    } else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
+      //select the first occurence in the data array
+      // debounce(() => {
+      const occurenceIndex = data
+        .map((child) => child.label.toLowerCase()[0])
+        .indexOf(event.key.toLowerCase());
+      // console.log(occurenceIndex);
+      setHoverValue(() => occurenceIndex);
+      document
+        .querySelector(`li[data-active="${occurenceIndex}"]`)
+        .scrollIntoView({ block: 'center' });
+      // }, 350);
+      //getHoverElement().scrollIntoView();
     }
-    // else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
-    //   //select the first occurence in the data array
-    //   const occurenceIndex = data
-    //     .map((child) => child.label.toLowerCase()[0])
-    //     .indexOf(event.key.toLowerCase());
-    //   setHoverValue(() => occurenceIndex);
-    //   document
-    //     .querySelector(`li[data-active="${occurenceIndex}"]`)
-    //     .scrollIntoView({ block: 'center' });
-    //   //getHoverElement().scrollIntoView();
-    // }
   }
 
   function getHoverElement() {
@@ -137,6 +138,18 @@ function Select({ handleChange, data, name }) {
     setIsVisible(() => false);
     setHoverValue(() => 0);
     setListeners(false);
+  }
+
+  function debounce(callback, delay) {
+    let timer;
+    return function () {
+      let args = arguments;
+      let context = this;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        callback.apply(context, args);
+      }, delay);
+    };
   }
 
   return (
