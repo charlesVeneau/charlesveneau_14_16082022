@@ -17,6 +17,7 @@ function Select({ handleChange, data, name }) {
   let [hasError, setHasError] = useState(false);
   let [selectValue, setSelectValue] = useState('NULL');
   let [hoverValue, setHoverValue] = useState(0);
+  let [queryValue, setQueryValue] = useState('');
   const optionList = useRef(null);
 
   const sortedData = data.sort(function (a, b) {
@@ -60,19 +61,30 @@ function Select({ handleChange, data, name }) {
     document.removeEventListener('mousedown', customSelectEventHandler);
   }
 
+  /**
+   * It takes a string as an argument and returns a different string based on the value of the argument.
+   * @returns the value of the name parameter if it is equal to 'state', otherwise it is returning the
+   * value of the name parameter.
+   */
   function getName(name) {
     if (name === 'state') return 'stateAbbrev';
     else return name;
   }
 
+  /**
+   * A function that handles the custom select.
+   */
   function handleCustomSelect(event) {
-    // const innerY = event.screenY - event.clientY;
-    // console.log(innerY);
     const newState = !isVisible;
     setIsVisible(!isVisible);
     setListeners(newState);
   }
 
+  /**
+   * If the event is 'down' and the hoverValue is less than the length of the sortedData array, increment
+   * the hoverValue by one. If the event is 'up' and the hoverValue is greater than zero, decrement the
+   * hoverValue by one
+   */
   function handleHoverSelect(event) {
     if (event === 'down' && hoverValue < sortedData.length) {
       setHoverValue(() => hoverValue++);
@@ -82,6 +94,9 @@ function Select({ handleChange, data, name }) {
     }
   }
 
+  /**
+   * It adds or removes event listeners based on the value of the visible parameter
+   */
   function setListeners(visible) {
     if (visible) {
       document.addEventListener('keydown', customSelectEventHandler);
@@ -112,45 +127,72 @@ function Select({ handleChange, data, name }) {
         !event.target.parentNode.getAttribute('aria-hidden') ||
         event.target.parentNode.getAttribute('aria-hidden') === 'true'
       ) {
-        setIsVisible(false);
+        closeCustomSelect();
       }
     } else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
       //select the first occurence in the data array
-      // debounce(() => {
       const occurenceIndex = data
         .map((child) => child.label.toLowerCase()[0])
         .indexOf(event.key.toLowerCase());
-      // console.log(occurenceIndex);
-      setHoverValue(() => occurenceIndex);
-      document
-        .querySelector(`li[data-active="${occurenceIndex}"]`)
-        .scrollIntoView({ block: 'center' });
-      // }, 350);
-      //getHoverElement().scrollIntoView();
+      if (occurenceIndex >= 0) {
+        setHoverValue(() => occurenceIndex);
+        document
+          .querySelector(`li[data-active="${occurenceIndex}"]`)
+          .scrollIntoView({ block: 'center' });
+      }
     }
+    // } else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
+    //   //select the first occurence in the data array
+    //   setQueryValue((state) => (state += event.key));
+    //   console.log();
+    //   // debounce(() => {
+    //   const filterArray = data.findIndex((item) => {
+    //     console.log(item);
+    //     return item.label.toLowerCase().includes(queryValue);
+    //   });
+    //   console.log(filterArray);
+    //   // const occurenceIndex = data
+    //   //   .map((child) => child.label.toLowerCase()[0])
+    //   //   .indexOf(event.key.toLowerCase());
+    //   // // console.log(occurenceIndex);
+    //   // setHoverValue(() => occurenceIndex);
+    //   // document
+    //   //   .querySelector(`li[data-active="${occurenceIndex}"]`)
+    //   //   .scrollIntoView({ block: 'center' });
+    //   // }, 350);
+    //   //getHoverElement().scrollIntoView();
+    // }
   }
 
+  /**
+   * It returns the currently hovered element.
+   * @returns The first li element with the class of isActive.
+   */
   function getHoverElement() {
     return optionList.current.querySelector(`li.isActive`);
   }
 
+  /**
+   * It closes the custom select by setting the isVisible state to false, the hoverValue state to 0, and
+   * the listeners state to false
+   */
   function closeCustomSelect() {
     setIsVisible(() => false);
     setHoverValue(() => 0);
     setListeners(false);
   }
 
-  function debounce(callback, delay) {
-    let timer;
-    return function () {
-      let args = arguments;
-      let context = this;
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        callback.apply(context, args);
-      }, delay);
-    };
-  }
+  // function debounce(callback, delay) {
+  //   let timer;
+  //   return function () {
+  //     let args = arguments;
+  //     let context = this;
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       callback.apply(context, args);
+  //     }, delay);
+  //   };
+  // }
 
   return (
     <div className="relativeBlock">
