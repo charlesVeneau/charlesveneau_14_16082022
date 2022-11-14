@@ -1,4 +1,32 @@
-import { useMemo, useState, useContext } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/Table/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/Table/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useMemo, useState, useContext } from 'react';
 import { UsersContext } from '../../utils/context';
 import {
   useTable,
@@ -62,28 +90,28 @@ function Table() {
     setModalOpen(() => !modalOpen);
   }
   return (
-    <>
-      <div className=" mt-8 xl:mt-16 flex flex-col gap-3 sm:flex-row items-start sm:justify-between my-4 sm:items-center">
-        <select
+    &lt;>
+      &lt;div className=" mt-8 xl:mt-16 flex flex-col gap-3 sm:flex-row items-start sm:justify-between my-4 sm:items-center">
+        &lt;select
           name="pageSize"
           className="p-1 rounded-md"
           value={pageSize}
           onChange={(e) => setPageSize(Number(e.target.value))}
         >
           {[10, 25, 50].map((pageSize) => (
-            <option value={pageSize} key={pageSize}>
+            &lt;option value={pageSize} key={pageSize}>
               Show {pageSize}
-            </option>
+            &lt;/option>
           ))}
-        </select>
-        <div className="flex gap-4 items-center justify-between sm:w-auto w-full">
-          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-          <div className="relative shadow">
-            <button
+        &lt;/select>
+        &lt;div className="flex gap-4 items-center justify-between sm:w-auto w-full">
+          &lt;GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+          &lt;div className="relative shadow">
+            &lt;button
               className="rounded-lg inline-flex items-center bg-white hover:text-green-600 focus:outline-none focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4"
               onClick={toggleModal}
             >
-              <svg
+              &lt;svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-6 h-6 md:hidden"
                 viewBox="0 0 24 24"
@@ -93,11 +121,11 @@ function Table() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
-                <path d="M5.5 5h13a1 1 0 0 1 0.5 1.5L14 12L14 19L10 16L10 12L5 6.5a1 1 0 0 1 0.5 -1.5" />
-              </svg>
-              <span className="hidden md:block">Display</span>
-              <svg
+                &lt;rect x="0" y="0" width="24" height="24" stroke="none">&lt;/rect>
+                &lt;path d="M5.5 5h13a1 1 0 0 1 0.5 1.5L14 12L14 19L10 16L10 12L5 6.5a1 1 0 0 1 0.5 -1.5" />
+              &lt;/svg>
+              &lt;span className="hidden md:block">Display&lt;/span>
+              &lt;svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-5 h-5 ml-1"
                 width="24"
@@ -109,61 +137,61 @@ function Table() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </button>
-            <div
+                &lt;rect x="0" y="0" width="24" height="24" stroke="none">&lt;/rect>
+                &lt;polyline points="6 9 12 15 18 9" />
+              &lt;/svg>
+            &lt;/button>
+            &lt;div
               className={`z-40 absolute top-0 right-0 w-40 bg-white rounded-lg shadow-lg mt-12 -mr-1 py-1 overflow-hidden ${
                 modalOpen ? 'block' : 'hidden'
               }`}
             >
-              <div>
-                <label
+              &lt;div>
+                &lt;label
                   htmlFor="toggleAll"
                   className="flex justify-start items-center text-truncate hover:bg-green-100 px-4 py-2 cursor-pointer"
                 >
-                  <div className="text-green-600 mr-3">
-                    <input
+                  &lt;div className="text-green-600 mr-3">
+                    &lt;input
                       type="checkbox"
                       id="toggleAll"
                       className="w-8 m-0 form-checkbox focus:outline-none focus:shadow-outline"
                       {...getToggleHideAllColumnsProps()}
                     />
-                  </div>
+                  &lt;/div>
                   Toggle All
-                </label>
-              </div>
+                &lt;/label>
+              &lt;/div>
               {allColumns.map((column) => (
-                <div key={column.id}>
-                  <label className="flex justify-start items-center text-truncate hover:bg-green-100 px-4 py-2 cursor-pointer ">
-                    <div className="text-green-600 mr-3">
-                      <input
+                &lt;div key={column.id}>
+                  &lt;label className="flex justify-start items-center text-truncate hover:bg-green-100 px-4 py-2 cursor-pointer ">
+                    &lt;div className="text-green-600 mr-3">
+                      &lt;input
                         className="w-8 m-0 form-checkbox focus:outline-none focus:shadow-outline"
                         type="checkbox"
                         {...column.getToggleHiddenProps()}
                       />
-                    </div>
+                    &lt;/div>
                     {column.Header}
-                  </label>
-                </div>
+                  &lt;/label>
+                &lt;/div>
               ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="rounded-overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
-        <table {...getTableProps()} id="users">
-          <thead className="h-11">
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="rounded-overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
+        &lt;table {...getTableProps()} id="users">
+          &lt;thead className="h-11">
             {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
+              &lt;tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <th
+                  &lt;th
                     className="bg-gray-200 sticky top-0 border-b border-gray-300 px-4 py-2 text-gray-700 font-semibold uppercase cursor-pointer text-left"
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render('Header')}
-                    <img
+                    &lt;img
                       alt=""
                       className={`ml-3 inline ${
                         column.isSorted ? 'h-4' : 'h-6'
@@ -176,40 +204,40 @@ function Table() {
                           : ChevronUpDownIcon
                       }
                     />
-                  </th>
+                  &lt;/th>
                 ))}
-              </tr>
+              &lt;/tr>
             ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
+          &lt;/thead>
+          &lt;tbody {...getTableBodyProps()}>
             {page.map((row) => {
               prepareRow(row);
               return (
-                <tr className="table-row h-10" {...row.getRowProps()}>
+                &lt;tr className="table-row h-10" {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     return (
-                      <td className="pl-2" {...cell.getCellProps()}>
+                      &lt;td className="pl-2" {...cell.getCellProps()}>
                         {cell.render('Cell')}
-                      </td>
+                      &lt;/td>
                     );
                   })}
-                </tr>
+                &lt;/tr>
               );
             })}
-          </tbody>
-        </table>
-      </div>
-      <div className="flex flex-col md:flex-row gap-3 md:gap-0 md:justify-between my-4">
-        <div className="pageBlock">
-          <span>
+          &lt;/tbody>
+        &lt;/table>
+      &lt;/div>
+      &lt;div className="flex flex-col md:flex-row gap-3 md:gap-0 md:justify-between my-4">
+        &lt;div className="pageBlock">
+          &lt;span>
             Page{' '}
-            <strong>
+            &lt;strong>
               {pageIndex + 1} of {pageOptions.length}
-            </strong>{' '}
-          </span>
-          <span>
+            &lt;/strong>{' '}
+          &lt;/span>
+          &lt;span>
             | Go to page:{' '}
-            <input
+            &lt;input
               className="w-12 m-0 p-1"
               type="number"
               defaultValue={pageIndex + 1}
@@ -220,41 +248,64 @@ function Table() {
                 gotoPage(pageNumber);
               }}
             />
-          </span>
-        </div>
-        <div className="pageBlock">
-          <button
+          &lt;/span>
+        &lt;/div>
+        &lt;div className="pageBlock">
+          &lt;button
             className="table-pageBtn"
             onClick={() => gotoPage(0)}
             disabled={!canPreviousPage}
           >
-            {'<<'}
-          </button>
-          <button
+            {'&lt;&lt;'}
+          &lt;/button>
+          &lt;button
             className="table-pageBtn"
             onClick={() => previousPage()}
             disabled={!canPreviousPage}
           >
             Previous
-          </button>
-          <button
+          &lt;/button>
+          &lt;button
             className="table-pageBtn"
             onClick={() => nextPage()}
             disabled={!canNextPage}
           >
             Next
-          </button>
-          <button
+          &lt;/button>
+          &lt;button
             className="table-pageBtn"
             onClick={() => gotoPage(pageCount - 1)}
             disabled={!canNextPage}
           >
             {'>>'}
-          </button>
-        </div>
-      </div>
-    </>
+          &lt;/button>
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
   );
 }
 
 export default Table;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Input.html">Input</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Employee">Employee</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#Table">Table</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Nov 14 2022 21:56:28 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

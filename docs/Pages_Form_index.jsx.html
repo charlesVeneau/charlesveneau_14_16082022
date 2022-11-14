@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Pages/Form/index.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Pages/Form/index.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Input from '../../Components/Input';
+import Select from '../../Components/Select';
+
+import SELECT_DATA from '../../data/SELECT_DATA.json';
+import { useState, useEffect, useContext } from 'react';
+import { ModalContext, UsersContext } from '../../utils/context';
+
+/**
+ * The Employee function returns a form that takes in user information and then saves it to the
+ * userInfo state
+ * @returns The Employee component is being returned.
+ */
+
+function Employee() {
+  const userMockup = {
+    id: 1,
+    firstName: null,
+    lastName: null,
+    dateofBirth: null,
+    street: null,
+    city: null,
+    stateAbbrev: null,
+    zipCode: null,
+    startDate: null,
+    department: null,
+  };
+  const [userInfo, setUserInfo] = useState(userMockup);
+
+  const [hasError, setHasError] = useState(true);
+
+  const { openModal } = useContext(ModalContext);
+
+  const { addUser } = useContext(UsersContext);
+  /**
+   * The function takes in an event and a name, and then sets the userInfo state to the current userInfo
+   * state, but with the name property set to the event
+   */
+  function handleChange(event, name) {
+    setUserInfo({ ...userInfo, [name]: event });
+  }
+
+  /* Checking to see if the userInfo object has any empty values. If it does, it sets the hasError state
+to true. If it doesn't, it sets the hasError state to false. */
+  useEffect(() => {
+    const userValues = Object.values(userInfo);
+    const errors = userValues.filter((value) => !value);
+    return errors.length > 0 ? setHasError(true) : setHasError(false);
+  }, [userInfo]);
+
+  /**
+   * It takes the userInfo object and saves it to localStorage
+   */
+  function saveUser() {
+    const users = JSON.parse(localStorage.getItem('savedUsers'));
+    const array = [];
+    if (users) {
+      userInfo.id = users.length;
+      users.push(userInfo);
+      localStorage.setItem('savedUsers', JSON.stringify(users));
+    } else {
+      userInfo.id = 1;
+      array.push(userInfo);
+      localStorage.setItem('savedUsers', JSON.stringify(array));
+    }
+    addUser(userInfo);
+    openModal();
+  }
+
+  return (
+    &lt;article className="text-right">
+      &lt;h2>Create Employee&lt;/h2>
+      &lt;div className="mx-auto sm:w-4/5">
+        &lt;form action="">
+          &lt;div className="form_block flex align-middle text-left justify-content">
+            &lt;div className="block_elt">
+              &lt;Input
+                handleChange={handleChange}
+                type="text"
+                name="First Name"
+              />
+              &lt;Input handleChange={handleChange} type="text" name="Last Name" />
+              &lt;Input
+                handleChange={handleChange}
+                type="date"
+                name="Date of Birth"
+              />
+              &lt;Input
+                handleChange={handleChange}
+                type="date"
+                name="Start Date"
+              />
+            &lt;/div>
+          &lt;/div>
+          &lt;div className="form_block form_block-center">
+            &lt;h3>Address&lt;/h3>
+            &lt;div className="block_elt">
+              &lt;Input handleChange={handleChange} type="text" name="Street" />
+              &lt;Input handleChange={handleChange} type="text" name="City" />
+              &lt;Select
+                handleChange={handleChange}
+                data={SELECT_DATA[0]['state']}
+                name="state"
+              />
+              &lt;Input handleChange={handleChange} type="text" name="Zip Code" />
+            &lt;/div>
+          &lt;/div>
+          &lt;div className="form_block form_block-center">
+            &lt;div className="block_elt">
+              &lt;Select
+                handleChange={handleChange}
+                data={SELECT_DATA[0]['department']}
+                name="department"
+              />
+            &lt;/div>
+          &lt;/div>
+        &lt;/form>
+        &lt;button
+          type="submit"
+          className="button"
+          disabled={hasError}
+          onClick={saveUser}
+        >
+          Save
+        &lt;/button>
+      &lt;/div>
+    &lt;/article>
+  );
+}
+
+export default Employee;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Input.html">Input</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Employee">Employee</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#Table">Table</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Nov 14 2022 21:56:28 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

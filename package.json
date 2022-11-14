@@ -2,6 +2,7 @@
   "name": "charlesveneau_14_16082022",
   "version": "0.1.0",
   "private": true,
+  "license": "ISC",
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "v1",
@@ -13,7 +14,7 @@
     "cv-custom-modal": "^1.0.3",
     "date-fns": "^2.29.3",
     "gh-pages": "^4.0.0",
-    "jsdoc": "^3.6.11",
+    "jsdoc": "^4.0.0",
     "postcss": "^8.4.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,7 +30,8 @@
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docs": "jsdoc -c jsdoc.conf.json"
   },
   "eslintConfig": {
     "extends": [
