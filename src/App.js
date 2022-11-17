@@ -25,14 +25,16 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
       <Modal isOpen={isOpen} closeModal={closeModal} content={content} />
-      <Routes>
-        <Route index element={<Form />} />
-        <Route path="/form" element={<Form />} />
-        <Route path="/employees" element={<Employees />} />
-        <Route path="/*" element={<Error />} />
-      </Routes>
+      <div className="container">
+        <Navbar />
+        <Routes>
+          <Route index element={<Form />} />
+          <Route path="/form" element={<Form />} />
+          <Route path="/employees" element={<Employees />} />
+          <Route path="/*" element={<Error />} />
+        </Routes>
+      </div>
     </div>
   );
 }

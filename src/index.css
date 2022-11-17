@@ -17,13 +17,13 @@ code {
 }
 
 @media screen and (min-width: 1280px) {
-  .App {
+  .container {
     grid-template-columns: 200px repeat(3, 1fr);
   }
 }
 
 @layer components {
-  .App {
+  .container {
     @apply xl:grid bg-slate-200 ml-auto mr-auto max-w-screen-2xl h-full;
   }
   .form_block {

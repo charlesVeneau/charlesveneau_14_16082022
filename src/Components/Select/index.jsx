@@ -141,27 +141,6 @@ function Select({ handleChange, data, name }) {
           .scrollIntoView({ block: 'center' });
       }
     }
-    // } else if (/^[a-zA-Zàâçéèêëîïôûùüÿñæœ]{1,}$/.test(event.key)) {
-    //   //select the first occurence in the data array
-    //   setQueryValue((state) => (state += event.key));
-    //   console.log();
-    //   // debounce(() => {
-    //   const filterArray = data.findIndex((item) => {
-    //     console.log(item);
-    //     return item.label.toLowerCase().includes(queryValue);
-    //   });
-    //   console.log(filterArray);
-    //   // const occurenceIndex = data
-    //   //   .map((child) => child.label.toLowerCase()[0])
-    //   //   .indexOf(event.key.toLowerCase());
-    //   // // console.log(occurenceIndex);
-    //   // setHoverValue(() => occurenceIndex);
-    //   // document
-    //   //   .querySelector(`li[data-active="${occurenceIndex}"]`)
-    //   //   .scrollIntoView({ block: 'center' });
-    //   // }, 350);
-    //   //getHoverElement().scrollIntoView();
-    // }
   }
 
   /**
@@ -182,17 +161,17 @@ function Select({ handleChange, data, name }) {
     setListeners(false);
   }
 
-  // function debounce(callback, delay) {
-  //   let timer;
-  //   return function () {
-  //     let args = arguments;
-  //     let context = this;
-  //     clearTimeout(timer);
-  //     timer = setTimeout(() => {
-  //       callback.apply(context, args);
-  //     }, delay);
-  //   };
-  // }
+  function debounce(callback, delay) {
+    let timer;
+    return function () {
+      let args = arguments;
+      let context = this;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        callback.apply(context, args);
+      }, delay);
+    };
+  }
 
   return (
     <div className="relativeBlock">
