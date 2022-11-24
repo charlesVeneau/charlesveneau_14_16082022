@@ -7,11 +7,7 @@ function Navbar() {
     <aside className="navbar">
       <NavLink to="/">
         <h1 className="text-center hidden sm:text-2xl md:text-3xl sm:flex sm:align-center gap-2 xl:mb-6 font-bold text-gray-900 ">
-          <img
-            src={Logo}
-            alt="WealthHealt"
-            className=" h-8 md:h-10 inline align-middle "
-          />
+          <img src={Logo} alt="WealthHealt" className=" inline align-middle " />
           <span className="">HRNet</span>
         </h1>
       </NavLink>
