@@ -1,6 +1,6 @@
 import Input from '../../Components/Input';
-import Select from '../../Components/Select';
-
+// import Select from '../../Components/Select';
+import { Select } from 'cv-custom-select';
 import SELECT_DATA from '../../data/SELECT_DATA.json';
 import { useState, useEffect, useContext } from 'react';
 import { ModalContext, UsersContext } from '../../utils/context';
