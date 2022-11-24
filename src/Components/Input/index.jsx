@@ -96,7 +96,7 @@ function Input({ handleChange, type, name }) {
         type={type}
         name={getName(name)}
         id={getName(name)}
-        className={`w-full pl-1 ${
+        className={`pl-1 ${
           isValid
             ? 'border-green-600 border-2'
             : hasError
