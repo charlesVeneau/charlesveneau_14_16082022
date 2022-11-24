@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 function Navbar() {
   return (
     <aside className="navbar">
-      <NavLink to="form">
+      <NavLink to="/">
         <h1 className="text-center hidden sm:text-2xl md:text-3xl sm:flex sm:align-center gap-2 xl:mb-6 font-bold text-gray-900 ">
           <img
             src={Logo}
@@ -17,7 +17,7 @@ function Navbar() {
       </NavLink>
       <ul className="flex xl:block justify-center gap-3">
         <li className="flex-grow">
-          <NavLink to="form">
+          <NavLink to="/" end>
             <UserAddIcon className="h-6 w-6 inline" />{' '}
             <span className="">New employee</span>
           </NavLink>
