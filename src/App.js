@@ -30,7 +30,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route index element={<Form />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/" element={<Form />} />
           <Route path="/employees" element={<Employees />} />
           <Route path="/*" element={<Error />} />
         </Routes>
