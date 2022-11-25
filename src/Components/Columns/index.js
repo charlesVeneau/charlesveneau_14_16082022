@@ -29,7 +29,6 @@ export const COLUMNS = [
     Footer: 'Date of Birth',
     accessor: 'dateOfBirth',
     Cell: ({ value }) => {
-      console.log(value);
       return format(new Date(value), 'dd/MM/yyyy');
     },
   },
