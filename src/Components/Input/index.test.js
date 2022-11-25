@@ -11,7 +11,7 @@ it('Should return a string in lowerCamelCase', () => {
 it('Should return a date minus the year passed in as a parameter in the YYYY-MM-DD format', () => {
   const param = 4;
   //   Set result has today's date minus param number of year
-  const result = `2018-11-24`;
+  const result = `2018-11-25`;
   expect(getLimiteDate(param)).toEqual(result);
 });
 
