@@ -27,8 +27,9 @@ export const COLUMNS = [
   {
     Header: 'Date of Birth',
     Footer: 'Date of Birth',
-    accessor: 'dateofBirth',
+    accessor: 'dateOfBirth',
     Cell: ({ value }) => {
+      console.log(value);
       return format(new Date(value), 'dd/MM/yyyy');
     },
   },
@@ -45,7 +46,7 @@ export const COLUMNS = [
   {
     Header: 'State',
     Footer: 'State',
-    accessor: 'stateAbbrev',
+    accessor: 'state',
   },
   {
     Header: 'Zip Code',

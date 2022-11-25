@@ -3850,9 +3850,9 @@ cv-custom-modal@^1.0.3:
   integrity sha512-2NTeiACdIEt2q8CNsfGpdzNSEjqC3gUf/EEVaw1w9OwyDca5YVw3OOTTFxN02iuKYSIBLODs8aE9TokMCGYzyg==
 
 cv-custom-select@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/cv-custom-select/-/cv-custom-select-1.0.3.tgz#4084bcfeb0c6921771028c5db74253351ce9c188"
-  integrity sha512-Tgge/vTixvrKKzgTF4eD3BVrM8ktsECWoguPbSV8VcvQHsP+jNMmJTiMeVRAZ6ewq78x32tDhe6thqbcVyYpaw==
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/cv-custom-select/-/cv-custom-select-1.0.5.tgz#d316e815e153d208b9141e8e484941b5f342d519"
+  integrity sha512-OeL4Q5Pic5q8kbFuSAGpB49zlvfHdFVlM2dIEAr7UlyN5CN1KJam8lhtO8VxgXPbM3RYscP/LNsW6W8TI/2w8g==
 
 damerau-levenshtein@^1.0.8:
   version "1.0.8"
