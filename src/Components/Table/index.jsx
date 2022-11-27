@@ -207,10 +207,11 @@ function Table() {
               {pageIndex + 1} of {pageOptions.length}
             </strong>{' '}
           </span>
-          <span>
+          <label htmlFor="pageOptions">
             | Go to page:{' '}
             <input
               className="w-12 m-0 p-1"
+              id="pageOptions"
               type="number"
               defaultValue={pageIndex + 1}
               onChange={(e) => {
@@ -220,7 +221,7 @@ function Table() {
                 gotoPage(pageNumber);
               }}
             />
-          </span>
+          </label>
         </div>
         <div className="pageBlock">
           <button
