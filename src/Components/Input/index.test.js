@@ -11,7 +11,7 @@ it('Should return a string in lowerCamelCase', () => {
 it('Should return a date minus the year passed in as a parameter in the YYYY-MM-DD format', () => {
   const param = 4;
   //   Set result has today's date minus param number of year
-  const result = `2018-11-25`;
+  const result = `2018-12-02`;
   expect(getLimiteDate(param)).toEqual(result);
 });
 
@@ -24,21 +24,21 @@ describe('The input component', () => {
     render(<Input handleChange={changeState} name="Last Name" type="text" />);
     const input = screen.getByLabelText('lastName');
     fireEvent.change(input, { target: { value: 'Veneau' } });
-    expect(input).toHaveClass('border-green-600');
+    expect(input).not.toHaveClass('border-red-500');
     expect(changeState).toBeCalled();
   });
   it('Should have a isValid class if the input has a valid zipCode value', () => {
     render(<Input handleChange={changeState} name="Zip Code" type="text" />);
     const input = screen.getByLabelText('zipCode');
     fireEvent.change(input, { target: { value: '92000' } });
-    expect(input).toHaveClass('border-green-600');
+    expect(input).not.toHaveClass('border-red-500');
     expect(changeState).toBeCalled();
   });
   it('Should have a isValid class if the input has a valid street value', () => {
     render(<Input handleChange={changeState} name="street" type="text" />);
     const input = screen.getByLabelText('street');
     fireEvent.change(input, { target: { value: '2 rue de grimoux' } });
-    expect(input).toHaveClass('border-green-600');
+    expect(input).not.toHaveClass('border-red-500');
     expect(changeState).toBeCalled();
   });
 });
