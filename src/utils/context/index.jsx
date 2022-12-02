@@ -38,7 +38,7 @@ export const UsersProvider = ({ children }) => {
   const [users, setUsers] = useState(localStorageUsers);
 
   function addUser(user) {
-    setUsers((users) => [...users, user]);
+    setUsers((users) => [user, ...users]);
   }
 
   return (
