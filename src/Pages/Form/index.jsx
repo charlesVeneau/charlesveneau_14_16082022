@@ -63,8 +63,13 @@ to true. If it doesn't, it sets the hasError state to false. */
       localStorage.setItem('savedUsers', JSON.stringify(array));
     }
     addUser(userInfo);
+    // clearForm()
     openModal();
   }
+
+  // function clearForm() {
+
+  // }
 
   return (
     <article className="text-right">
