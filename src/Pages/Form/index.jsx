@@ -14,17 +14,17 @@ import { ModalContext, UsersContext } from '../../utils/context';
 function Employee() {
   const userMockup = {
     id: 1,
-    firstName: null,
-    lastName: null,
-    dateOfBirth: null,
-    street: null,
-    city: null,
-    state: null,
-    zipCode: null,
-    startDate: null,
-    department: null,
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    startDate: '',
+    department: '',
   };
-  const [userInfo, setUserInfo] = useState(userMockup);
+  const [userInfo, setUserInfo] = useState({ ...userMockup });
 
   const [hasError, setHasError] = useState(true);
 
@@ -50,7 +50,9 @@ to true. If it doesn't, it sets the hasError state to false. */
   /**
    * It takes the userInfo object and saves it to localStorage
    */
-  function saveUser() {
+  function saveUser(event) {
+    event.preventDefault();
+    console.log('handle submit');
     const users = JSON.parse(localStorage.getItem('savedUsers'));
     const array = [];
     if (users) {
@@ -63,19 +65,15 @@ to true. If it doesn't, it sets the hasError state to false. */
       localStorage.setItem('savedUsers', JSON.stringify(array));
     }
     addUser(userInfo);
-    // clearForm()
     openModal();
+    event.target.reset();
   }
-
-  // function clearForm() {
-
-  // }
 
   return (
     <article className="text-right">
       <h2>Create Employee</h2>
       <div className="mx-auto sm:w-4/5">
-        <form action="">
+        <form onSubmit={saveUser}>
           <div className="form_block flex align-middle text-left justify-content">
             <div className="block_elt">
               <Input
@@ -118,15 +116,10 @@ to true. If it doesn't, it sets the hasError state to false. */
               />
             </div>
           </div>
+          <button type="submit" className="button" disabled={hasError}>
+            Save
+          </button>
         </form>
-        <button
-          type="submit"
-          className="button"
-          disabled={hasError}
-          onClick={saveUser}
-        >
-          Save
-        </button>
       </div>
     </article>
   );
