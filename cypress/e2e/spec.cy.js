@@ -1,6 +1,6 @@
 describe('HR Net form', () => {
   it('visit the home page', () => {
-    cy.visit('http://localhost:3001/#/');
+    cy.visit('http://localhost:3000/#/');
   });
 });
 
@@ -14,26 +14,26 @@ describe('Employee section', () => {
   it('fill the firstName input', () => {
     cy.get('#firstName').type('charles');
   });
-  it('firstName input have green border', () => {
-    cy.get('#firstName').should('have.class', 'border-green-600');
+  it('firstName input is valid', () => {
+    cy.get('#firstName').should('not.have.class', 'border-red-500');
   });
   it('fill the lastName input', () => {
     cy.get('#lastName').type('veneau');
   });
-  it('lastName input have green border', () => {
-    cy.get('#lastName').should('have.class', 'border-green-600');
+  it('lastName input is valid', () => {
+    cy.get('#lastName').should('not.have.class', 'border-red-500');
   });
   it('fill the date of birth input', () => {
     cy.get('#dateOfBirth').type('1985-12-10');
   });
-  it('date of birth input have green border', () => {
-    cy.get('#dateOfBirth').should('have.class', 'border-green-600');
+  it('date of birth input is valid', () => {
+    cy.get('#dateOfBirth').should('not.have.class', 'border-red-500');
   });
   it('fill the start date input', () => {
     cy.get('#startDate').type('2021-05-17');
   });
-  it('start date input have green border', () => {
-    cy.get('#startDate').should('have.class', 'border-green-600');
+  it('start date input is valid', () => {
+    cy.get('#startDate').should('not.have.class', 'border-red-500');
   });
 });
 
@@ -41,30 +41,30 @@ describe('Adress section', () => {
   it('fill the street input', () => {
     cy.get('#street').type('15 rue Alfred Laurant');
   });
-  it('street input have green border', () => {
-    cy.get('#street').should('have.class', 'border-green-600');
+  it('street input is valid', () => {
+    cy.get('#street').should('not.have.class', 'border-red-500');
   });
 
   it('fill the city input', () => {
     cy.get('#city').type('Boulogne Billancourt');
   });
-  it('city input have green border', () => {
-    cy.get('#city').should('have.class', 'border-green-600');
+  it('city input is valid', () => {
+    cy.get('#city').should('not.have.class', 'border-red-500');
   });
 
   it('select the last state option', () => {
     cy.get('#state').select(58, { force: true });
   });
-  it('state have green border', () => {
+  it('state is valid', () => {
     cy.get('#state').should('have.value', 'WY');
-    cy.get('#state').should('have.class', 'isValid');
+    cy.get('#state').should('not.have.class', 'hasError');
   });
 
   it('fill the zipcode input', () => {
     cy.get('#zipCode').type('75000');
   });
-  it('zipcode input have green border', () => {
-    cy.get('#zipCode').should('have.class', 'border-green-600');
+  it('zipcode input is valid', () => {
+    cy.get('#zipCode').should('not.have.class', 'border-red-500');
   });
 });
 
@@ -72,9 +72,9 @@ describe('Department section', () => {
   it('select the last department option', () => {
     cy.get('#department').select(9, { force: true });
   });
-  it('department have green border', () => {
+  it('department is valid', () => {
     cy.get('#department').should('have.value', 'TR');
-    cy.get('#department').should('have.class', 'isValid');
+    cy.get('#department').should('not.have.class', 'hasError');
   });
 });
 

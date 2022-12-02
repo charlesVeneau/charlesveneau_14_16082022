@@ -41,7 +41,6 @@ export function getLimiteDate(limit) {
  * @return {react.Component}
  */
 function Input({ handleChange, type, name }) {
-  let [isValid, setIsValid] = useState(false);
   let [hasError, setHasError] = useState(false);
 
   /**
@@ -74,7 +73,6 @@ function Input({ handleChange, type, name }) {
       (getName(name) === 'zipCode' && zipCodeRegex.test(event.target.value)) ||
       (event.target.type === 'date' && dateRegex.test(event.target.value))
     ) {
-      setIsValid(true);
       setHasError(false);
       if (event.target.type === 'date') {
         const isoDate = new Date(event.target.value).toISOString();
@@ -83,7 +81,6 @@ function Input({ handleChange, type, name }) {
         handleChange(event.target.value, getName(name));
       }
     } else {
-      setIsValid(false);
       setHasError(true);
     }
   }
@@ -99,11 +96,7 @@ function Input({ handleChange, type, name }) {
         aria-label={getName(name)}
         id={getName(name)}
         className={`pl-1 ${
-          isValid
-            ? 'border-green-600 border-2'
-            : hasError
-            ? 'border-red-500 border-2'
-            : 'border-slate-300 border'
+          hasError ? 'border-red-500 border-2' : 'border-slate-300 border'
         }`}
         onChange={handleError}
         max={name === 'Date of Birth' ? getLimiteDate(18) : null}
